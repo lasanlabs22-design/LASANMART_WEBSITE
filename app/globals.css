@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+:root {
+  --orange: #ff6b35;
+  --orange-deep: #f2542d;
+  --violet: #6d3bf5;
+  --violet-deep: #4b21c4;
+  --yellow: #ffc529;
+  --ink: #14102e;
+  --ink-soft: #241d4f;
+  --paper: #fffdf9;
+  --muted: #6b6685;
+  --line: rgba(20, 16, 46, 0.09);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* ---------- Type ---------- */
+
+.display {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.02;
+}
+
+.display-md {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ---------- Decoration ---------- */
+
+/* Blurred colour blobs behind sections */
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Fine grid, masked to fade at the edges */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(20, 16, 46, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 16, 46, 0.045) 1px, transparent 1px);
+  background-size: 46px 46px;
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    #000 30%,
+    transparent 75%
+  );
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    #000 30%,
+    transparent 75%
+  );
+}
+
+/* A yellow highlighter swipe behind a word */
+.marker {
+  position: relative;
+  display: inline-block;
+}
+.marker::after {
+  content: "";
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  bottom: 8%;
+  height: 36%;
+  background: var(--yellow);
+  border-radius: 3px;
+  z-index: -1;
+  transform: rotate(-1.2deg);
+}
+
+/* ---------- Motion ---------- */
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.rise {
+  animation: riseIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(30px, -26px) scale(1.1);
+  }
+}
+.drift {
+  animation: drift 18s ease-in-out infinite;
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-14px) rotate(var(--tilt, 0deg));
+  }
+}
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 32s linear infinite;
+}
+
+/* ---------- Bits ---------- */
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease;
+}
+.card-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 44px rgba(20, 16, 46, 0.1);
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 16, 46, 0.16);
+  border-radius: 6px;
+  border: 3px solid var(--paper);
+}
+
+/* ---------- Extra motion ---------- */
+
+/* Text that reveals from behind a mask */
+@keyframes maskUp {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mask-line {
+  overflow: hidden;
+  display: block;
+}
+.mask-line > span {
+  display: block;
+  animation: maskUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Gradient that slides through text */
+@keyframes hueShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.gradient-text {
+  background: linear-gradient(90deg, #ff6b35, #6d3bf5, #ffc529, #ff6b35);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: hueShift 8s ease infinite;
+}
+
+/* Border that traces round a card on hover */
+.trace {
+  position: relative;
+  overflow: hidden;
+}
+.trace::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: conic-gradient(
+    from var(--angle, 0deg),
+    transparent 70%,
+    var(--orange),
+    var(--violet),
+    transparent
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+.trace:hover::before {
+  opacity: 1;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spinAngle {
+  to {
+    --angle: 360deg;
+  }
+}
+.trace:hover::before {
+  animation: spinAngle 2.5s linear infinite;
+}
+
+/* A slow tilt on hover, for cards */
+.tilt {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+}
+.tilt:hover {
+  transform: perspective(900px) rotateX(2deg) rotateY(-3deg) translateY(-6px);
+}
+
+/* Scroll progress bar */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  z-index: 60;
+  background: linear-gradient(
+    90deg,
+    var(--orange),
+    var(--violet),
+    var(--yellow)
+  );
+  transform-origin: left;
+}
+
+/* ---------- Policy pages ---------- */
+
+.policy-body p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--muted);
+}
+
+.policy-body strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.link {
+  color: var(--violet);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.link:hover {
+  color: var(--violet-deep);
+}
