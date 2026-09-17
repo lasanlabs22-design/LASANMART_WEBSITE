@@ -4,6 +4,7 @@ import Reveal from "@/components/Reveal";
 import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
 import ServiceCarousel from "@/components/ServiceCarousel";
+import Faq from "@/components/Faq";
 import { PLANS, CONTACT } from "@/lib/site";
 
 export default function Home() {
@@ -898,6 +899,46 @@ export default function Home() {
               </a>
             </p>
           </Reveal>
+        </div>
+      </section>
+
+      {/* ==================== FAQ ==================== */}
+      <section id="faq" className="relative py-28 px-5 overflow-hidden">
+        <div
+          className="blob"
+          style={{
+            width: 460,
+            height: 460,
+            top: "15%",
+            left: "-14%",
+            background: "var(--violet)",
+            opacity: 0.1,
+          }}
+        />
+
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal>
+            <p
+              className="eyebrow text-center"
+              style={{ color: "var(--orange)" }}
+            >
+              Questions
+            </p>
+            <h2
+              className="display text-center mt-4"
+              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
+            >
+              The things people ask.
+            </h2>
+            <p
+              className="text-center mt-5 text-[16px] max-w-md mx-auto"
+              style={{ color: "var(--muted)" }}
+            >
+              Anything else, call us — we&apos;d rather talk it through.
+            </p>
+          </Reveal>
+
+          <Faq />
         </div>
       </section>
 
