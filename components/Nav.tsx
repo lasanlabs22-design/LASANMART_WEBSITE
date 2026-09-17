@@ -5,9 +5,10 @@ import StoreButton from "./StoreButton";
 
 const LINKS = [
   { href: "#services", label: "Services" },
+  { href: "#freelancers", label: "Freelancers" },
   { href: "#vibes", label: "Lasan Vibes" },
   { href: "#plans", label: "Plans" },
-  { href: "#contact", label: "Contact" },
+  { href: "#hub", label: "Lasan Hub" },
 ];
 
 export default function Nav() {

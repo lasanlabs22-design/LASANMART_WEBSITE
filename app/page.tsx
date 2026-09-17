@@ -297,6 +297,105 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ==================== FREELANCERS ==================== */}
+      <section id="freelancers" className="relative py-28 px-5 overflow-hidden">
+        <div
+          className="blob drift"
+          style={{
+            width: 440,
+            height: 440,
+            top: "10%",
+            right: "-12%",
+            background: "var(--violet)",
+            opacity: 0.14,
+          }}
+        />
+
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal>
+            <p
+              className="eyebrow text-center"
+              style={{ color: "var(--violet)" }}
+            >
+              New
+            </p>
+            <h2
+              className="display text-center mt-4"
+              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
+            >
+              Need a shoot?
+              <br />
+              An editor? <span className="marker">Just ask.</span>
+            </h2>
+            <p
+              className="text-center mt-5 text-[16px] max-w-lg mx-auto leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Pick what you need — more than one is fine — and our team finds
+              the right person and comes back with a quote.
+            </p>
+          </Reveal>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-16">
+            {[
+              {
+                icon: "📷",
+                label: "Photography",
+                body: "Products, interiors, food, events",
+                c: "#3A86FF",
+              },
+              {
+                icon: "🎥",
+                label: "Videography",
+                body: "Shoots, coverage, reels, ads",
+                c: "#C13584",
+              },
+              {
+                icon: "✂️",
+                label: "Video Editing",
+                body: "Cutting, colour, subtitles, reels",
+                c: "var(--violet)",
+              },
+              {
+                icon: "📈",
+                label: "Digital Marketing",
+                body: "Social media, ads, content, SEO",
+                c: "#0EA97A",
+              },
+            ].map((f, i) => (
+              <Reveal key={f.label} delay={i * 0.08}>
+                <div
+                  className="card card-lift p-6 h-full group cursor-default"
+                  style={{ borderColor: "var(--line)" }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+                    style={{
+                      background: `color-mix(in srgb, ${f.c} 12%, transparent)`,
+                    }}
+                  >
+                    {f.icon}
+                  </div>
+
+                  <h3
+                    className="display-md text-[17px] mt-5"
+                    style={{ color: f.c }}
+                  >
+                    {f.label}
+                  </h3>
+                  <p
+                    className="mt-2 text-[13.5px] leading-relaxed"
+                    style={{ color: "var(--muted)" }}
+                  >
+                    {f.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ==================== LASAN VIBES ==================== */}
       <section
         id="vibes"
@@ -609,6 +708,196 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ==================== LASAN HUB ==================== */}
+      <section
+        id="hub"
+        className="relative py-28 px-5 overflow-hidden"
+        style={{ background: "var(--ink)" }}
+      >
+        <div
+          className="blob drift"
+          style={{
+            width: 500,
+            height: 500,
+            top: "-15%",
+            left: "-10%",
+            background: "var(--violet)",
+            opacity: 0.45,
+          }}
+        />
+        <div
+          className="blob drift"
+          style={{
+            width: 380,
+            height: 380,
+            bottom: "-20%",
+            right: "-8%",
+            background: "var(--orange)",
+            opacity: 0.3,
+            animationDelay: "-7s",
+          }}
+        />
+
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal>
+            <div className="text-center">
+              <span
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
+                style={{
+                  background: "rgba(255,197,41,0.14)",
+                  border: "1px solid rgba(255,197,41,0.25)",
+                }}
+              >
+                <span
+                  className="w-2 h-2 rounded-full animate-pulse"
+                  style={{ background: "var(--yellow)" }}
+                />
+                <span
+                  className="text-[12px] font-bold tracking-[0.14em]"
+                  style={{ color: "var(--yellow)" }}
+                >
+                  COMING SOON
+                </span>
+              </span>
+
+              <h2
+                className="display text-white mt-7"
+                style={{ fontSize: "clamp(32px, 6vw, 56px)" }}
+              >
+                Lasan Hub
+              </h2>
+
+              <p className="text-white/60 text-[17px] mt-5 max-w-xl mx-auto leading-relaxed">
+                A second app, for the people who do the work. Creators, vendors
+                and freelancers join our verified network — and we bring them
+                jobs from businesses who have already paid.
+              </p>
+            </div>
+          </Reveal>
+
+          {/* The three who can join */}
+          <div className="grid md:grid-cols-3 gap-5 mt-16">
+            {[
+              {
+                icon: "⭐",
+                role: "Creators",
+                line: "Instagram, YouTube, city pages",
+                body: "Set your rate once. Businesses browse by budget and category, and we bring you the brief.",
+                c: "#C13584",
+              },
+              {
+                icon: "🏪",
+                role: "Vendors",
+                line: "Hoardings, print, events, field teams",
+                body: "When a client needs what you offer, our team comes to the vendors on this list first.",
+                c: "#0EA97A",
+              },
+              {
+                icon: "💻",
+                role: "Freelancers",
+                line: "Design, video, photography, marketing",
+                body: "No bidding wars, no undercutting. Scoped briefs, priced before they reach you.",
+                c: "#3A86FF",
+              },
+            ].map((r, i) => (
+              <Reveal key={r.role} delay={i * 0.1}>
+                <div
+                  className="rounded-[24px] p-7 h-full group transition-all duration-300 hover:-translate-y-2"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                >
+                  <div
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110"
+                    style={{
+                      background: `color-mix(in srgb, ${r.c} 22%, transparent)`,
+                    }}
+                  >
+                    {r.icon}
+                  </div>
+
+                  <h3
+                    className="display-md text-[21px] mt-6"
+                    style={{ color: r.c }}
+                  >
+                    {r.role}
+                  </h3>
+                  <p className="text-[12.5px] mt-1 text-white/40">{r.line}</p>
+
+                  <p className="text-[14.5px] leading-relaxed mt-4 text-white/65">
+                    {r.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* How a job travels */}
+          <Reveal delay={0.3}>
+            <div
+              className="rounded-[24px] p-8 mt-10"
+              style={{
+                background: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <p
+                className="eyebrow text-center"
+                style={{ color: "var(--yellow)" }}
+              >
+                How a job travels
+              </p>
+
+              <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+                {[
+                  "Business posts a request",
+                  "We match a partner",
+                  "They accept and get to work",
+                  "Client says how it went",
+                ].map((step, i, arr) => (
+                  <div key={step} className="flex items-center gap-3">
+                    <div
+                      className="px-4 py-3 rounded-2xl text-[13px] font-semibold text-center"
+                      style={{
+                        background: "rgba(255,255,255,0.07)",
+                        color: "rgba(255,255,255,0.85)",
+                      }}
+                    >
+                      {step}
+                    </div>
+
+                    {i < arr.length - 1 && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="var(--yellow)"
+                        className="w-4 h-4 shrink-0 hidden sm:block"
+                        style={{ opacity: 0.5 }}
+                      >
+                        <path d="m10 17 5-5-5-5v10Z" />
+                      </svg>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.4}>
+            <p className="text-center text-white/40 text-[14px] mt-10">
+              Want to join when it opens? Call us on{" "}
+              <a
+                href={`tel:+91${CONTACT.phone}`}
+                className="font-semibold hover:text-white/70"
+                style={{ color: "var(--yellow)" }}
+              >
+                {CONTACT.phone}
+              </a>
+            </p>
+          </Reveal>
         </div>
       </section>
 
