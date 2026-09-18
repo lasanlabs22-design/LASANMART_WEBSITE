@@ -8,7 +8,7 @@ const LINKS = [
   { href: "#freelancers", label: "Freelancers" },
   { href: "#vibes", label: "Lasan Vibes" },
   { href: "#plans", label: "Plans" },
-  { href: "#hub", label: "Lasan Hub" },
+  { href: "#hub", label: "Lasan Mart Hub" },
 ];
 
 export default function Nav() {

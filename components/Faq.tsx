@@ -33,8 +33,8 @@ const QUESTIONS = [
     a: "A plan bundles several services over three months at a fixed price — useful if you want steady marketing rather than one campaign. A single request is exactly that: one job, quoted on its own.",
   },
   {
-    q: "What is Lasan Hub, and should I be on it?",
-    a: "Lasan Hub is the other side of the same business. If you provide services — you're a creator, run a printing or hoarding business, or freelance as a photographer, editor or marketer — that's the app for you. Businesses looking to buy marketing want Lasan Mart.",
+    q: "What is Lasan Mart Hub, and should I be on it?",
+    a: "Lasan Mart Hub is the other side of the same business. If you provide services — you're a creator, run a printing or hoarding business, or freelance as a photographer, editor or marketer — that's the app for you. Businesses looking to buy marketing want Lasan Mart.",
   },
   {
     q: "How does a partner get work through you?",

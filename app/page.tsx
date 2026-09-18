@@ -768,7 +768,7 @@ export default function Home() {
                 className="display text-white mt-7"
                 style={{ fontSize: "clamp(32px, 6vw, 56px)" }}
               >
-                Lasan Hub
+                Lasan Mart Hub
               </h2>
 
               <p className="text-white/60 text-[17px] mt-5 max-w-xl mx-auto leading-relaxed">
