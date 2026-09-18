@@ -902,6 +902,200 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ==================== BOTH APPS ==================== */}
+      <section id="apps" className="relative py-28 px-5 overflow-hidden">
+        <div
+          className="blob drift"
+          style={{
+            width: 420,
+            height: 420,
+            top: "5%",
+            right: "-12%",
+            background: "var(--orange)",
+            opacity: 0.12,
+          }}
+        />
+
+        <div className="relative max-w-5xl mx-auto">
+          <Reveal>
+            <p
+              className="eyebrow text-center"
+              style={{ color: "var(--orange)" }}
+            >
+              Open to everyone
+            </p>
+            <h2
+              className="display text-center mt-4"
+              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
+            >
+              Two apps.
+              <br />
+              Made for <span className="marker">anyone.</span>
+            </h2>
+            <p
+              className="text-center mt-5 text-[16px] max-w-xl mx-auto leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              You don&apos;t need to run a business to use Lasan Mart, or be a
+              vendor to use Lasan Mart Hub. Download one, or both — whoever you
+              are.
+            </p>
+          </Reveal>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-16">
+            {[
+              {
+                name: "Lasan Mart",
+                tag: "Available now",
+                line: "For anyone who wants to be seen.",
+                points: [
+                  "Ask for any of our 30 services",
+                  "Watch and post on Lasan Vibes",
+                  "Use free tools like the Quotation Generator",
+                ],
+                dark: false,
+              },
+              {
+                name: "Lasan Mart Hub",
+                tag: "Coming soon",
+                line: "For anyone who wants to earn.",
+                points: [
+                  "Join as a creator, vendor or freelancer",
+                  "Get briefs that are priced before they reach you",
+                  "No bidding wars, no undercutting",
+                ],
+                dark: true,
+              },
+            ].map((app, i) => (
+              <Reveal key={app.name} delay={i * 0.1}>
+                <div
+                  className="rounded-[24px] p-8 h-full tilt"
+                  style={{
+                    background: app.dark
+                      ? "linear-gradient(160deg,#7C4DFF,#4B21C4)"
+                      : "#fff",
+                    border: app.dark
+                      ? "1px solid transparent"
+                      : "1px solid var(--line)",
+                    boxShadow: app.dark
+                      ? "0 24px 50px rgba(75,33,196,0.26)"
+                      : "0 4px 16px rgba(20,16,46,0.05)",
+                  }}
+                >
+                  <span
+                    className="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md"
+                    style={{
+                      background: app.dark
+                        ? "rgba(255,197,41,0.18)"
+                        : "rgba(255,107,53,0.12)",
+                      color: app.dark ? "var(--yellow)" : "var(--orange)",
+                    }}
+                  >
+                    {app.tag}
+                  </span>
+
+                  <h3
+                    className="display-md text-[24px] mt-5"
+                    style={{ color: app.dark ? "#fff" : "var(--ink)" }}
+                  >
+                    {app.name}
+                  </h3>
+                  <p
+                    className="text-[15px] mt-1.5"
+                    style={{
+                      color: app.dark
+                        ? "rgba(255,255,255,0.65)"
+                        : "var(--muted)",
+                    }}
+                  >
+                    {app.line}
+                  </p>
+
+                  <ul className="space-y-3 mt-6">
+                    {app.points.map((p) => (
+                      <li
+                        key={p}
+                        className="flex items-start gap-2.5 text-[14.5px]"
+                        style={{
+                          color: app.dark ? "#fff" : "var(--ink)",
+                          opacity: 0.85,
+                        }}
+                      >
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill={app.dark ? "var(--yellow)" : "var(--orange)"}
+                          className="w-4 h-4 shrink-0 mt-0.5"
+                        >
+                          <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z" />
+                        </svg>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* Hub members should grab Mart too — that's where Vibes lives */}
+          <Reveal delay={0.2}>
+            <div
+              className="rounded-[24px] p-8 md:p-10 mt-8 grid md:grid-cols-[1.3fr_1fr] gap-8 items-center"
+              style={{ background: "var(--ink)" }}
+            >
+              <div>
+                <p className="eyebrow" style={{ color: "var(--yellow)" }}>
+                  On Hub? Get Lasan Mart too
+                </p>
+                <h3
+                  className="display text-white mt-3"
+                  style={{ fontSize: "clamp(24px, 3.4vw, 32px)" }}
+                >
+                  Your work belongs on Lasan Vibes.
+                </h3>
+                <p className="text-white/60 text-[15px] leading-relaxed mt-4 max-w-md">
+                  Lasan Vibes lives inside Lasan Mart. Install it alongside Hub
+                  and post your shoots, reels and finished jobs where every
+                  Lasan Mart user sees them — the easiest way to show
+                  businesses what you can do.
+                </p>
+                <div className="mt-7">
+                  <StoreButton />
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                {[
+                  { label: "Lasan Mart Hub", c: "var(--violet)" },
+                  { label: "Lasan Mart", c: "var(--orange)" },
+                ].map((chip, i) => (
+                  <div key={chip.label} className="flex items-center gap-3">
+                    {i > 0 && (
+                      <span className="display text-[22px] text-white/40">
+                        +
+                      </span>
+                    )}
+                    <span
+                      className="px-4 py-2.5 rounded-2xl text-[13px] font-semibold text-white"
+                      style={{ background: chip.c }}
+                    >
+                      {chip.label}
+                    </span>
+                  </div>
+                ))}
+                <span className="display text-[22px] text-white/40">=</span>
+                <span
+                  className="px-4 py-2.5 rounded-2xl text-[13px] font-bold"
+                  style={{ background: "var(--yellow)", color: "var(--ink)" }}
+                >
+                  Seen on Vibes
+                </span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ==================== FAQ ==================== */}
       <section id="faq" className="relative py-28 px-5 overflow-hidden">
         <div

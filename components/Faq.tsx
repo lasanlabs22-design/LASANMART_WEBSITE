@@ -34,7 +34,7 @@ const QUESTIONS = [
   },
   {
     q: "What is Lasan Mart Hub, and should I be on it?",
-    a: "Lasan Mart Hub is the other side of the same business. If you provide services — you're a creator, run a printing or hoarding business, or freelance as a photographer, editor or marketer — that's the app for you. Businesses looking to buy marketing want Lasan Mart.",
+    a: "Lasan Mart Hub is the other side of the same business. If you provide services — you're a creator, run a printing or hoarding business, or freelance as a photographer, editor or marketer — that's where you get work. Both apps are open to anyone, though, and many people use both: install Lasan Mart alongside Hub to post your work on Lasan Vibes, where every Lasan Mart user can see it.",
   },
   {
     q: "How does a partner get work through you?",
