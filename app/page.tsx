@@ -14,7 +14,7 @@ export default function Home() {
       <Aurora />
 
       {/* ==================== HERO ==================== */}
-      <section className="relative pt-36 pb-24 px-5 overflow-hidden z-10">
+      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 px-5 overflow-hidden z-10">
         <div className="absolute inset-0 grid-bg" />
 
         <div className="relative max-w-5xl mx-auto text-center">
@@ -149,12 +149,17 @@ export default function Home() {
 
       {/* ==================== MARQUEE ==================== */}
       <section
-        className="relative z-10 py-5 overflow-hidden border-y"
+        className="marquee-wrap relative z-10 py-4 sm:py-5 overflow-hidden border-y"
         style={{ background: "var(--ink)", borderColor: "var(--ink-soft)" }}
+        aria-label="Services we offer"
       >
         <div className="flex marquee whitespace-nowrap">
           {[0, 1].map((copy) => (
-            <div key={copy} className="flex items-center shrink-0">
+            <div
+              key={copy}
+              className="flex items-center shrink-0"
+              aria-hidden={copy === 1 || undefined}
+            >
               {[
                 "HOARDINGS",
                 "SOCIAL MEDIA",
@@ -169,7 +174,7 @@ export default function Home() {
               ].map((word) => (
                 <span key={word} className="flex items-center">
                   <span
-                    className="display-md text-[22px] px-7"
+                    className="display-md text-[18px] sm:text-[22px] px-5 sm:px-7"
                     style={{ color: "rgba(255,255,255,0.9)" }}
                   >
                     {word}
@@ -206,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* ==================== HOW IT WORKS ==================== */}
-      <section className="relative z-10 py-24 px-5">
+      <section className="relative z-10 py-16 sm:py-24 px-5">
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <p
@@ -223,7 +228,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {[
               {
                 n: "01",
@@ -267,7 +272,7 @@ export default function Home() {
       </section>
 
       {/* ==================== SERVICES ==================== */}
-      <section id="services" className="relative z-10 py-24 px-5">
+      <section id="services" className="relative z-10 py-16 sm:py-24 px-5">
         <div className="relative max-w-5xl mx-auto">
           <Reveal>
             <p
@@ -299,7 +304,7 @@ export default function Home() {
       </section>
 
       {/* ==================== FREELANCERS ==================== */}
-      <section id="freelancers" className="relative py-28 px-5 overflow-hidden">
+      <section id="freelancers" className="relative py-20 sm:py-28 px-5 overflow-hidden">
         <div
           className="blob drift"
           style={{
@@ -337,7 +342,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-16">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mt-12 sm:mt-16">
             {[
               {
                 icon: "📷",
@@ -366,11 +371,11 @@ export default function Home() {
             ].map((f, i) => (
               <Reveal key={f.label} delay={i * 0.08}>
                 <div
-                  className="card card-lift p-6 h-full group cursor-default"
+                  className="card card-lift p-4 sm:p-6 h-full group cursor-default"
                   style={{ borderColor: "var(--line)" }}
                 >
                   <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
                     style={{
                       background: `color-mix(in srgb, ${f.c} 12%, transparent)`,
                     }}
@@ -379,13 +384,13 @@ export default function Home() {
                   </div>
 
                   <h3
-                    className="display-md text-[17px] mt-5"
+                    className="display-md text-[15.5px] sm:text-[17px] mt-4 sm:mt-5 leading-tight"
                     style={{ color: f.c }}
                   >
                     {f.label}
                   </h3>
                   <p
-                    className="mt-2 text-[13.5px] leading-relaxed"
+                    className="mt-2 text-[13px] sm:text-[13.5px] leading-relaxed"
                     style={{ color: "var(--muted)" }}
                   >
                     {f.body}
@@ -400,7 +405,7 @@ export default function Home() {
       {/* ==================== LASAN VIBES ==================== */}
       <section
         id="vibes"
-        className="relative z-10 py-28 px-5 overflow-hidden"
+        className="relative z-10 py-20 sm:py-28 px-5 overflow-hidden"
         style={{ background: "var(--ink)" }}
       >
         <div
@@ -494,7 +499,7 @@ export default function Home() {
       </section>
 
       {/* ==================== PLANS ==================== */}
-      <section id="plans" className="relative z-10 py-28 px-5">
+      <section id="plans" className="relative z-10 py-20 sm:py-28 px-5">
         <div className="max-w-5xl mx-auto">
           <Reveal>
             <p
@@ -517,7 +522,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {PLANS.map((plan, i) => {
               const tone =
                 plan.tone === "orange"
@@ -598,7 +603,7 @@ export default function Home() {
                       }}
                     />
 
-                    <ul className="space-y-3">
+                    <ul className="ticks space-y-3">
                       {plan.features.map((f) => (
                         <li
                           key={f}
@@ -636,7 +641,7 @@ export default function Home() {
 
       {/* ==================== TOOLS ==================== */}
       <section
-        className="relative z-10 py-28 px-5"
+        className="relative z-10 py-20 sm:py-28 px-5"
         style={{ background: "#fff" }}
       >
         <div className="max-w-5xl mx-auto">
@@ -655,7 +660,7 @@ export default function Home() {
             </h2>
           </Reveal>
 
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {[
               {
                 icon: "📄",
@@ -715,7 +720,7 @@ export default function Home() {
       {/* ==================== LASAN HUB ==================== */}
       <section
         id="hub"
-        className="relative py-28 px-5 overflow-hidden"
+        className="relative py-20 sm:py-28 px-5 overflow-hidden"
         style={{ background: "var(--ink)" }}
       >
         <div
@@ -840,7 +845,7 @@ export default function Home() {
           {/* How a job travels */}
           <Reveal delay={0.3}>
             <div
-              className="rounded-[24px] p-8 mt-10"
+              className="rounded-[24px] p-6 sm:p-8 mt-10"
               style={{
                 background: "rgba(255,255,255,0.03)",
                 border: "1px solid rgba(255,255,255,0.08)",
@@ -853,21 +858,20 @@ export default function Home() {
                 How a job travels
               </p>
 
-              <div className="flex flex-wrap items-center justify-center gap-3 mt-8">
+              {/* Steps light up in order — stacked on phones, a row above */}
+              <ol className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
                 {[
                   "Business posts a request",
                   "We match a partner",
                   "They accept and get to work",
                   "Client says how it went",
                 ].map((step, i, arr) => (
-                  <div key={step} className="flex items-center gap-3">
-                    <div
-                      className="px-4 py-3 rounded-2xl text-[13px] font-semibold text-center"
-                      style={{
-                        background: "rgba(255,255,255,0.07)",
-                        color: "rgba(255,255,255,0.85)",
-                      }}
-                    >
+                  <li
+                    key={step}
+                    className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3"
+                    style={{ "--i": i } as React.CSSProperties}
+                  >
+                    <div className="flow-step w-full sm:w-auto px-4 py-3 rounded-2xl text-[13px] font-semibold text-center">
                       {step}
                     </div>
 
@@ -875,15 +879,15 @@ export default function Home() {
                       <svg
                         viewBox="0 0 24 24"
                         fill="var(--yellow)"
-                        className="w-4 h-4 shrink-0 hidden sm:block"
-                        style={{ opacity: 0.5 }}
+                        className="flow-arrow w-4 h-4 shrink-0 rotate-90 sm:rotate-0"
+                        aria-hidden
                       >
                         <path d="m10 17 5-5-5-5v10Z" />
                       </svg>
                     )}
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ol>
             </div>
           </Reveal>
 
@@ -903,7 +907,7 @@ export default function Home() {
       </section>
 
       {/* ==================== BOTH APPS ==================== */}
-      <section id="apps" className="relative py-28 px-5 overflow-hidden">
+      <section id="apps" className="relative py-20 sm:py-28 px-5 overflow-hidden">
         <div
           className="blob drift"
           style={{
@@ -942,7 +946,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="grid md:grid-cols-2 gap-6 mt-16">
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {[
               {
                 name: "Lasan Mart",
@@ -1011,7 +1015,7 @@ export default function Home() {
                     {app.line}
                   </p>
 
-                  <ul className="space-y-3 mt-6">
+                  <ul className="ticks space-y-3 mt-6">
                     {app.points.map((p) => (
                       <li
                         key={p}
@@ -1097,7 +1101,7 @@ export default function Home() {
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section id="faq" className="relative py-28 px-5 overflow-hidden">
+      <section id="faq" className="relative py-20 sm:py-28 px-5 overflow-hidden">
         <div
           className="blob"
           style={{
@@ -1139,7 +1143,7 @@ export default function Home() {
       {/* ==================== DOWNLOAD ==================== */}
       <section
         id="contact"
-        className="relative z-10 py-28 px-5 overflow-hidden"
+        className="relative z-10 py-20 sm:py-28 px-5 overflow-hidden"
         style={{ background: "var(--ink)" }}
       >
         <div
@@ -1215,7 +1219,7 @@ export default function Home() {
           borderColor: "rgba(255,255,255,0.08)",
         }}
       >
-        <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-4">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-items-center md:justify-items-stretch gap-5 md:gap-4 text-center md:text-left">
           <div className="flex items-center gap-2.5">
             <div
               className="w-8 h-8 rounded-lg flex items-center justify-center"
@@ -1230,7 +1234,12 @@ export default function Home() {
             </span>
           </div>
 
-          <div className="flex items-center gap-6 text-[13px] text-white/40">
+          <p className="text-[12.5px] tracking-[0.04em] text-white/40 md:text-center">
+            Powered by{" "}
+            <span className="font-semibold text-white/70">Lasan Labs</span>
+          </p>
+
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2 text-[13px] text-white/40">
             <a href="/privacy" className="hover:text-white/70">
               Privacy Policy
             </a>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Slide = {
   eyebrow: string;
@@ -56,32 +56,77 @@ const SLIDES: Slide[] = [
   },
 ];
 
+const AUTOPLAY_MS = 6500;
+
 export default function ServiceCarousel() {
   const [active, setActive] = useState(0);
+  // Autoplay runs until someone takes control, then stays out of the way
+  const [manual, setManual] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [inView, setInView] = useState(false);
   const touchStart = useRef(0);
+  const root = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.4 },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const go = (next: number) => {
     setActive((next + SLIDES.length) % SLIDES.length);
   };
 
+  const userGo = (next: number) => {
+    setManual(true);
+    go(next);
+  };
+
+  const playing = !manual && !hovered && inView;
+
   return (
-    <div className="relative">
-      {/* Stack — cards behind peek out, so it reads as a deck */}
-      <div className="relative h-[440px] sm:h-[400px]">
+    <div
+      ref={root}
+      className="relative"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label="Services"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocus={() => setHovered(true)}
+      onBlur={() => setHovered(false)}
+      onKeyDown={(e) => {
+        if (e.key === "ArrowRight") userGo(active + 1);
+        if (e.key === "ArrowLeft") userGo(active - 1);
+      }}
+    >
+      {/* Stack — cards behind peek out, so it reads as a deck. All slides
+          share one grid cell, so the deck is as tall as its tallest card */}
+      <div className="relative grid">
         {SLIDES.map((slide, i) => {
           const offset = (i - active + SLIDES.length) % SLIDES.length;
           const isActive = offset === 0;
           const depth = Math.min(offset, 3);
+          const enter = isActive ? "rise" : "";
 
           return (
             <div
               key={slide.title}
+              aria-roledescription="slide"
+              aria-label={`${i + 1} of ${SLIDES.length}: ${slide.title}`}
+              aria-hidden={!isActive}
+              inert={!isActive}
               onTouchStart={(e) => (touchStart.current = e.touches[0].clientX)}
               onTouchEnd={(e) => {
                 const delta = e.changedTouches[0].clientX - touchStart.current;
-                if (Math.abs(delta) > 50) go(active + (delta < 0 ? 1 : -1));
+                if (Math.abs(delta) > 50) userGo(active + (delta < 0 ? 1 : -1));
               }}
-              className="absolute inset-0 rounded-[28px] p-8 sm:p-10 flex flex-col justify-between"
+              className="[grid-area:1/1] min-h-[360px] sm:min-h-[380px] rounded-[24px] sm:rounded-[28px] p-6 sm:p-10 flex flex-col justify-between"
               style={{
                 background: slide.gradient,
                 transform: `translateY(${depth * 14}px) scale(${1 - depth * 0.04})`,
@@ -95,32 +140,37 @@ export default function ServiceCarousel() {
                   "transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease, box-shadow 0.5s ease",
               }}
             >
+              {/* Contents re-rise each time a slide comes to the front */}
               <div>
                 <p
-                  className="eyebrow"
-                  style={{ color: slide.accent, opacity: 0.85 }}
+                  className={`eyebrow ${enter}`}
+                  style={{ color: slide.accent, opacity: 0.85, animationDelay: "0.08s" }}
                 >
                   {slide.eyebrow}
                 </p>
                 <h3
-                  className="display text-white mt-3"
-                  style={{ fontSize: "clamp(26px, 4.5vw, 40px)" }}
+                  className={`display text-white mt-3 ${enter}`}
+                  style={{ fontSize: "clamp(26px, 4.5vw, 40px)", animationDelay: "0.14s" }}
                 >
                   {slide.title}
                 </h3>
-                <p className="text-white/75 text-[15px] leading-relaxed mt-4 max-w-md">
+                <p
+                  className={`text-white/75 text-[14.5px] sm:text-[15px] leading-relaxed mt-4 max-w-md ${enter}`}
+                  style={{ animationDelay: "0.2s" }}
+                >
                   {slide.body}
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-2 mt-6">
-                {slide.tags.map((t) => (
+                {slide.tags.map((t, j) => (
                   <span
                     key={t}
-                    className="text-[12.5px] font-semibold px-3.5 py-2 rounded-xl"
+                    className={`text-[12px] sm:text-[12.5px] font-semibold px-3 sm:px-3.5 py-2 rounded-xl ${enter}`}
                     style={{
                       background: "rgba(255,255,255,0.18)",
                       color: "#fff",
+                      animationDelay: `${0.26 + j * 0.05}s`,
                     }}
                   >
                     {t}
@@ -138,14 +188,31 @@ export default function ServiceCarousel() {
           {SLIDES.map((s, i) => (
             <button
               key={s.title}
-              onClick={() => setActive(i)}
-              aria-label={s.title}
-              className="h-2 rounded-full transition-all duration-400"
+              type="button"
+              onClick={() => userGo(i)}
+              aria-label={`Show ${s.title}`}
+              aria-current={i === active ? "true" : undefined}
+              className="relative h-2 rounded-full overflow-hidden transition-all duration-500 before:absolute before:-inset-3 before:content-['']"
               style={{
                 width: i === active ? 32 : 8,
-                background: i === active ? "var(--ink)" : "rgba(20,16,46,0.18)",
+                background:
+                  i === active && manual ? "var(--ink)" : "rgba(20,16,46,0.18)",
               }}
-            />
+            >
+              {/* Fills over the autoplay interval; finishing it advances */}
+              {i === active && !manual && (
+                <span
+                  key={active}
+                  aria-hidden
+                  className="dot-fill absolute inset-0 rounded-full"
+                  style={{
+                    animationDuration: `${AUTOPLAY_MS}ms`,
+                    animationPlayState: playing ? "running" : "paused",
+                  }}
+                  onAnimationEnd={() => go(active + 1)}
+                />
+              )}
+            </button>
           ))}
         </div>
 
@@ -153,8 +220,9 @@ export default function ServiceCarousel() {
           {[-1, 1].map((dir) => (
             <button
               key={dir}
-              onClick={() => go(active + dir)}
-              aria-label={dir < 0 ? "Previous" : "Next"}
+              type="button"
+              onClick={() => userGo(active + dir)}
+              aria-label={dir < 0 ? "Previous service" : "Next service"}
               className="w-11 h-11 rounded-full border-2 flex items-center justify-center transition hover:-translate-y-0.5"
               style={{ borderColor: "var(--ink)" }}
             >

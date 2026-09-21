@@ -56,46 +56,59 @@ export default function Faq() {
 
         return (
           <Reveal key={item.q} delay={Math.min(i, 6) * 0.04}>
-            <button
-              onClick={() => setOpen(isOpen ? null : i)}
-              className="w-full text-left card p-6 transition"
+            <div
+              className="card transition-colors"
               style={{
                 borderColor: isOpen ? "var(--violet)" : "var(--line)",
                 background: isOpen ? "rgba(109,59,245,0.03)" : "#fff",
               }}
             >
-              <div className="flex items-start justify-between gap-5">
-                <h3
-                  className="display-md text-[17px] leading-snug"
-                  style={{
-                    color: isOpen ? "var(--violet-deep)" : "var(--ink)",
-                  }}
+              <h3>
+                <button
+                  type="button"
+                  id={`faq-q-${i}`}
+                  aria-expanded={isOpen}
+                  aria-controls={`faq-a-${i}`}
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full text-left p-5 sm:p-6 flex items-start justify-between gap-4 sm:gap-5 rounded-[22px]"
                 >
-                  {item.q}
-                </h3>
-
-                <span
-                  className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300"
-                  style={{
-                    background: isOpen
-                      ? "var(--violet)"
-                      : "rgba(20,16,46,0.05)",
-                    transform: isOpen ? "rotate(45deg)" : "none",
-                  }}
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill={isOpen ? "#fff" : "var(--muted)"}
-                    className="w-4 h-4"
+                  <span
+                    className="display-md text-[16px] sm:text-[17px] leading-snug transition-colors"
+                    style={{
+                      color: isOpen ? "var(--violet-deep)" : "var(--ink)",
+                    }}
                   >
-                    <path d="M11 5h2v14h-2V5Z" />
-                    <path d="M5 11h14v2H5v-2Z" />
-                  </svg>
-                </span>
-              </div>
+                    {item.q}
+                  </span>
+
+                  <span
+                    aria-hidden
+                    className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform duration-300"
+                    style={{
+                      background: isOpen
+                        ? "var(--violet)"
+                        : "rgba(20,16,46,0.05)",
+                      transform: isOpen ? "rotate(45deg)" : "none",
+                    }}
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill={isOpen ? "#fff" : "var(--muted)"}
+                      className="w-4 h-4"
+                    >
+                      <path d="M11 5h2v14h-2V5Z" />
+                      <path d="M5 11h14v2H5v-2Z" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
 
               {/* Grid trick — animates height without knowing it */}
               <div
+                id={`faq-a-${i}`}
+                role="region"
+                aria-labelledby={`faq-q-${i}`}
+                inert={!isOpen}
                 className="grid transition-all duration-300 ease-out"
                 style={{
                   gridTemplateRows: isOpen ? "1fr" : "0fr",
@@ -104,14 +117,14 @@ export default function Faq() {
               >
                 <div className="overflow-hidden">
                   <p
-                    className="text-[15px] leading-relaxed pt-4 pr-10"
+                    className="text-[14.5px] sm:text-[15px] leading-relaxed px-5 sm:px-6 pb-6 -mt-1 sm:-mt-2 pr-12 sm:pr-16"
                     style={{ color: "var(--muted)" }}
                   >
                     {item.a}
                   </p>
                 </div>
               </div>
-            </button>
+            </div>
           </Reveal>
         );
       })}

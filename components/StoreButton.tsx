@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PLAY_STORE_URL } from "@/lib/site";
 
 export default function StoreButton({
@@ -9,7 +9,10 @@ export default function StoreButton({
   variant?: "light" | "dark";
 }) {
   const [nudged, setNudged] = useState(false);
+  const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
   const live = PLAY_STORE_URL.length > 0;
+
+  useEffect(() => () => clearTimeout(timer.current), []);
 
   const inner = (
     <>
@@ -26,7 +29,7 @@ export default function StoreButton({
   );
 
   const classes =
-    "inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl font-semibold transition hover:-translate-y-0.5 active:translate-y-0";
+    "sheen inline-flex items-center gap-3 px-6 py-3.5 rounded-2xl font-semibold transition hover:-translate-y-0.5 active:translate-y-0";
 
   const style =
     variant === "dark"
@@ -41,9 +44,11 @@ export default function StoreButton({
     return (
       <div className="relative">
         <button
+          type="button"
           onClick={() => {
             setNudged(true);
-            setTimeout(() => setNudged(false), 2600);
+            clearTimeout(timer.current);
+            timer.current = setTimeout(() => setNudged(false), 2600);
           }}
           className={classes}
           style={style}
@@ -51,14 +56,16 @@ export default function StoreButton({
           {inner}
         </button>
 
-        {nudged && (
-          <div
-            className="absolute left-0 top-full mt-2 text-[12.5px] px-3 py-2 rounded-xl rise whitespace-nowrap"
-            style={{ background: "var(--yellow)", color: "var(--ink)" }}
-          >
-            Launching shortly — call us and we&apos;ll set you up today
-          </div>
-        )}
+        <div role="status" aria-live="polite">
+          {nudged && (
+            <div
+              className="absolute left-0 top-full mt-2 z-20 w-max max-w-[240px] text-left text-[12.5px] leading-snug px-3 py-2 rounded-xl rise"
+              style={{ background: "var(--yellow)", color: "var(--ink)" }}
+            >
+              Launching shortly — call us and we&apos;ll set you up today
+            </div>
+          )}
+        </div>
       </div>
     );
   }
@@ -67,7 +74,7 @@ export default function StoreButton({
     <a
       href={PLAY_STORE_URL}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       className={classes}
       style={style}
     >

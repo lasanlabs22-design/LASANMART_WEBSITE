@@ -24,6 +24,11 @@ export default function Ticker({
         if (!entry.isIntersecting || started.current) return;
         started.current = true;
 
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          setValue(to);
+          return;
+        }
+
         const start = performance.now();
 
         const step = (now: number) => {
