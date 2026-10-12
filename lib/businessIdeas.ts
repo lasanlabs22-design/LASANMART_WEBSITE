@@ -5,7 +5,6 @@
  */
 export type BusinessIdea = {
   sector: string;
-  emoji: string;
   headline: string;
   overview: string;
   opportunities: string[];
@@ -16,7 +15,6 @@ export type BusinessIdea = {
 export const BUSINESS_IDEAS: BusinessIdea[] = [
   {
     sector: "Retail & Shops",
-    emoji: "🛍️",
     headline: "Turn footfall into a following",
     overview:
       "Retail shops lose most of their customers the moment they walk out. Nobody captures who came in or why. The businesses that grow are the ones that stay in touch after the sale.",
@@ -31,7 +29,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Restaurants & Cafes",
-    emoji: "🍽️",
     headline: "People eat with their eyes first",
     overview:
       "Restaurants live and die on photos and reviews. A customer decides in about six seconds of scrolling whether your food looks worth the trip.",
@@ -46,7 +43,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Real Estate",
-    emoji: "🏘️",
     headline: "Sell the life, not the layout",
     overview:
       "Real estate buyers research for months before they call. Your job is to be the name they keep seeing during that long, quiet decision.",
@@ -62,7 +58,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Healthcare & Clinics",
-    emoji: "🩺",
     headline: "Trust is the whole product",
     overview:
       "Patients choose clinics on reputation and convenience. Marketing here is less about persuasion and more about being visible, credible and easy to reach.",
@@ -77,7 +72,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Education & Coaching",
-    emoji: "🎓",
     headline: "Results are your best advertisement",
     overview:
       "Coaching and education sell on outcomes. Parents and students want proof that people like them succeeded here.",
@@ -92,7 +86,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Automotive",
-    emoji: "🚗",
     headline: "Win the service relationship",
     overview:
       "Cars are bought rarely and serviced often. The money is in staying attached to the customer between purchases.",
@@ -107,7 +100,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Fashion & Apparel",
-    emoji: "👕",
     headline: "Post like a brand, not a shop",
     overview:
       "Fashion moves fast and visually. Consistency of look matters more than volume of posts. Customers follow an aesthetic, not a catalogue.",
@@ -122,7 +114,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Beauty & Salon",
-    emoji: "✂️",
     headline: "Before-and-after does the selling",
     overview:
       "Salons and beauty services have the most persuasive content built into the work itself. Most simply never film it.",
@@ -137,7 +128,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Fitness & Gym",
-    emoji: "🏋️",
     headline: "Sell the community, not the equipment",
     overview:
       "Gyms compete on price and lose. The ones that hold members sell belonging. People stay for the people, not the machines.",
@@ -152,7 +142,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Travel & Hospitality",
-    emoji: "🛏️",
     headline: "Inspire the trip, then close it",
     overview:
       "Travel is an emotional purchase researched rationally. You need beautiful content to start the dream and easy booking to finish it.",
@@ -167,7 +156,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Jewellery",
-    emoji: "💎",
     headline: "Occasion-led, not always-on",
     overview:
       "Jewellery sells around weddings and festivals. The rest of the year is for building the trust that makes you the obvious choice when the occasion comes.",
@@ -183,7 +171,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Electronics",
-    emoji: "📱",
     headline: "Compete on service, not on price",
     overview:
       "Electronics buyers compare prices online and buy where they trust the after-sales. Say that out loud in your marketing.",
@@ -199,7 +186,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Home & Interiors",
-    emoji: "🛋️",
     headline: "Show finished spaces, not products",
     overview:
       "Interior customers cannot picture a sofa in isolation. Completed project photography converts far better than product listings.",
@@ -214,7 +200,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Manufacturing",
-    emoji: "🏭",
     headline: "B2B runs on credibility",
     overview:
       "Manufacturing buyers care about capacity, quality and reliability. Consumer-style marketing wastes money here.",
@@ -229,7 +214,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Agriculture",
-    emoji: "🌱",
     headline: "Reach farmers where they already are",
     overview:
       "Agricultural buyers trust demonstration and word of mouth over advertising. Marketing works best when it looks like education.",
@@ -244,7 +228,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "IT & Software",
-    emoji: "💻",
     headline: "Prove it before you pitch it",
     overview:
       "Software buyers want evidence. Case studies and demos move deals; feature lists do not.",
@@ -259,7 +242,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Financial Services",
-    emoji: "🏦",
     headline: "Clarity beats cleverness",
     overview:
       "Financial services sell on trust and simplicity. Customers who do not understand your offer will not buy it.",
@@ -274,7 +256,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Events & Wedding",
-    emoji: "🎉",
     headline: "Your past work is your portfolio",
     overview:
       "Event and wedding clients book on emotion. Every event you run should generate content that books the next three.",
@@ -289,7 +270,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Logistics",
-    emoji: "🚚",
     headline: "Reliability is the pitch",
     overview:
       "Logistics buyers switch for dependability and rates. Visibility matters less than being findable when something goes wrong with their current provider.",
@@ -304,7 +284,6 @@ export const BUSINESS_IDEAS: BusinessIdea[] = [
   },
   {
     sector: "Other",
-    emoji: "✨",
     headline: "Start with the fundamentals",
     overview:
       "Whatever your sector, the first three moves are the same: be findable, be reachable, and be visibly active.",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import LoopVideo from "./LoopVideo";
 
 type Slide = {
   eyebrow: string;
@@ -9,6 +10,8 @@ type Slide = {
   tags: string[];
   gradient: string;
   accent: string;
+  /** Clip that plays behind the colour, from public/media */
+  clip: string;
 };
 
 const SLIDES: Slide[] = [
@@ -19,6 +22,7 @@ const SLIDES: Slide[] = [
     tags: ["Site scouting", "Design & print", "Permissions", "Photo proof"],
     gradient: "linear-gradient(150deg, #FF9A4D, #E63946)",
     accent: "#FFE0CC",
+    clip: "outdoor",
   },
   {
     eyebrow: "Online",
@@ -32,6 +36,7 @@ const SLIDES: Slide[] = [
     ],
     gradient: "linear-gradient(150deg, #7C4DFF, #4B21C4)",
     accent: "#DCD0FF",
+    clip: "social",
   },
   {
     eyebrow: "Creators",
@@ -45,6 +50,7 @@ const SLIDES: Slide[] = [
     ],
     gradient: "linear-gradient(150deg, #FFC529, #E5A800)",
     accent: "#3D2E00",
+    clip: "creators",
   },
   {
     eyebrow: "Build",
@@ -53,6 +59,7 @@ const SLIDES: Slide[] = [
     tags: ["Websites", "Landing pages", "Custom CRM", "Attendance"],
     gradient: "linear-gradient(150deg, #2D3561, #14102E)",
     accent: "#C9CDEB",
+    clip: "build",
   },
 ];
 
@@ -126,7 +133,7 @@ export default function ServiceCarousel() {
                 const delta = e.changedTouches[0].clientX - touchStart.current;
                 if (Math.abs(delta) > 50) userGo(active + (delta < 0 ? 1 : -1));
               }}
-              className="[grid-area:1/1] min-h-[360px] sm:min-h-[380px] rounded-[24px] sm:rounded-[28px] p-6 sm:p-10 flex flex-col justify-between"
+              className="relative overflow-hidden [grid-area:1/1] min-h-[360px] sm:min-h-[400px] rounded-[24px] sm:rounded-[28px] p-6 sm:p-10 flex flex-col justify-between"
               style={{
                 background: slide.gradient,
                 transform: `translateY(${depth * 14}px) scale(${1 - depth * 0.04})`,
@@ -140,8 +147,30 @@ export default function ServiceCarousel() {
                   "transform 0.6s cubic-bezier(0.22,1,0.36,1), opacity 0.5s ease, box-shadow 0.5s ease",
               }}
             >
+              {/* Footage under the brand colour, so the slide reads as
+                  the service rather than a flat card */}
+              <LoopVideo
+                src={`/media/svc-${slide.clip}.mp4`}
+                poster={`/media/svc-${slide.clip}.jpg`}
+                active={isActive}
+                className="absolute inset-0 w-full h-full"
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{ background: slide.gradient, opacity: 0.8 }}
+              />
+              <div
+                aria-hidden
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(100deg, rgba(10,8,24,0.45), transparent 65%)",
+                }}
+              />
+
               {/* Contents re-rise each time a slide comes to the front */}
-              <div>
+              <div className="relative z-[2]">
                 <p
                   className={`eyebrow ${enter}`}
                   style={{ color: slide.accent, opacity: 0.85, animationDelay: "0.08s" }}
@@ -162,7 +191,7 @@ export default function ServiceCarousel() {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2 mt-6">
+              <div className="relative z-[2] flex flex-wrap gap-2 mt-6">
                 {slide.tags.map((t, j) => (
                   <span
                     key={t}
