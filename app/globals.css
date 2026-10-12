@@ -624,6 +624,21 @@ body {
   pointer-events: none;
 }
 
+/* The "Powered by Lasan Labs" signature keeps Lasan's own look, as in
+   Lasan People and Lasan Grow: Space Grotesk and the violet-to-cyan
+   gradient, deeper shades on light backgrounds, lighter on dark ones. */
+.lasan-signature {
+  font-family: var(--font-space-grotesk), var(--font-body), sans-serif;
+  letter-spacing: -0.025em;
+  background: linear-gradient(100deg, #3b2a8f 10%, #6843f5 55%, #0891b2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.on-dark .lasan-signature {
+  background-image: linear-gradient(100deg, #fff 10%, #b3a1ff 55%, #22d3ee);
+}
+
 /* ---------- Reduced motion ---------- */
 
 @media (prefers-reduced-motion: reduce) {

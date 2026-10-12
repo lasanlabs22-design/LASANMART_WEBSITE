@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Plus_Jakarta_Sans } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Plus_Jakarta_Sans,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 
 const display = Bricolage_Grotesque({
@@ -13,6 +17,14 @@ const body = Plus_Jakarta_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-body",
+  display: "swap",
+});
+
+// Only for the "Powered by Lasan Labs" signature, as in Lasan People and Lasan Grow
+const signature = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["600"],
+  variable: "--font-space-grotesk",
   display: "swap",
 });
 
@@ -35,7 +47,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${display.variable} ${body.variable}`}>{children}</body>
+      <body
+        className={`${display.variable} ${body.variable} ${signature.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
