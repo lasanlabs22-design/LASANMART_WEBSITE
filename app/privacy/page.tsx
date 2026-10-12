@@ -3,10 +3,11 @@ import { CONTACT } from "@/lib/site";
 
 export const metadata = {
   title: "Privacy Policy — Lasan Mart",
-  description: "How Lasan Mart collects, uses and protects your information.",
+  description:
+    "How Lasan Mart and Lasan Mart Hub collect, use and protect your information.",
 };
 
-const UPDATED = "3 September 2026";
+const UPDATED = "12 October 2026";
 
 export default function Privacy() {
   return (
@@ -60,6 +61,12 @@ export default function Privacy() {
             and this app is how you tell us what you need.
           </p>
           <p>
+            We also run Lasan Mart Hub, a separate app for the creators,
+            vendors and freelancers who do some of that work. This policy
+            covers both apps. What is specific to Hub is set out in its own
+            section below.
+          </p>
+          <p>
             If you have any question about this policy or about your
             information, contact us at{" "}
             <a href={`mailto:${CONTACT.email}`} className="link">
@@ -81,10 +88,13 @@ export default function Privacy() {
               items={[
                 "Your name, phone number and email address, so our team can contact you about a request",
                 "Your business name, description and sector, where you choose to provide them",
+                "Your Instagram and Facebook IDs, if you add them to your profile",
                 "Your business address, if you set one — either by typing it, or by using your location",
                 "A profile photo and company logo, if you upload them",
-                "The content of your requests: what service you want, your budget range, timing and any description you write",
-                "Videos and captions you post to Lasan Vibes",
+                "The content of your requests: what service you want, your budget range, timing and any description you write, including any creators or freelance skills you ask for",
+                "Your one-tap feedback on finished work, which only our team sees",
+                "Videos and captions you post to Lasan Vibes, and what you tell us when you ask to post",
+                "Which Lasan Vibes videos you like",
               ]}
             />
           </Sub>
@@ -95,6 +105,7 @@ export default function Privacy() {
                 "A device token, if you allow notifications, so we can alert you when a request changes status",
                 "Basic technical information needed to deliver the app, such as your device type and app version",
                 "View counts on Lasan Vibes videos, which are anonymous and not linked to you",
+                "Usage statistics in Lasan Mart through Google Analytics for Firebase, such as which screens are opened and which features are used. We look at these in aggregate and do not attach your name, phone number or email to them",
               ]}
             />
           </Sub>
@@ -146,11 +157,11 @@ export default function Privacy() {
             {[
               {
                 name: "Google Firebase",
-                use: "Phone number verification, Google sign-in and push notifications",
+                use: "Phone number verification, Google sign-in, push notifications and usage statistics",
               },
               {
                 name: "Cloudinary",
-                use: "Storing and delivering videos posted to Lasan Vibes",
+                use: "Storing and delivering Lasan Vibes videos, profile photos and company logos",
               },
               {
                 name: "Resend",
@@ -200,13 +211,58 @@ export default function Privacy() {
           </p>
         </Section>
 
+        <Section title="Lasan Mart Hub partners">
+          <p>
+            If you join Lasan Mart Hub as a creator, vendor or freelancer, we
+            verify your phone number the same way, and you can also sign in
+            with Google.
+          </p>
+
+          <Sub title="What we collect from partners">
+            <Bullets
+              items={[
+                "Your name, phone number, email address, city, a short description and a profile photo",
+                "Creators: your Instagram handle, what you post about, your follower count and your rate per post",
+                "Vendors: your company name, GST number, the services you offer and your rate card",
+                "Freelancers: your skills, a portfolio link, your Instagram handle and your rate card",
+                "The jobs we offer you and how you respond: accepting, declining with a reason, progress updates and notes",
+                "Messages you send our team from the app about payment, your profile, availability or anything else",
+              ]}
+            />
+          </Sub>
+
+          <Sub title="Who sees your profile">
+            <p>
+              A person on our team reviews every profile before it goes live,
+              and again after you edit it. Once a creator is approved,
+              businesses browsing Lasan Mart can see their name, photo,
+              Instagram handle, follower count, category, city, rate per post
+              and description. They never see your phone number, email or GST
+              number. Vendor and freelancer profiles are seen only by our team.
+            </p>
+            <p>
+              When we offer you a job, you see the client&apos;s first name,
+              their city and the brief. Everything else stays with our team.
+            </p>
+          </Sub>
+
+          <Sub title="Leaving Hub">
+            <p>
+              Ask our team to pause your profile and no new work will reach
+              you. To leave for good, request deletion from the Account tab in
+              the app. We remove your profile, work history and everything else
+              we hold about you within 30 days.
+            </p>
+          </Sub>
+        </Section>
+
         <Section title="How long we keep it">
           <Bullets
             items={[
               "Your contact details and requests are kept while you use the service, so you can see your own history",
               "Videos are kept until you delete them, or until our team removes them",
               "Notification tokens are removed when you uninstall the app",
-              "You can ask us to delete everything at any time — see below",
+              "You can delete everything at any time. See below",
             ]}
           />
         </Section>
@@ -214,7 +270,14 @@ export default function Privacy() {
         <Section title="Your choices">
           <Sub title="Deleting your data">
             <p>
-              Email{" "}
+              In Lasan Mart, go to Settings and tap Delete Account. That
+              removes your contact details, requests, notifications, likes and
+              videos straight away, along with your phone sign-in. It
+              doesn&apos;t touch a Lasan Mart Hub profile on the same number,
+              which you delete from Hub itself.
+            </p>
+            <p>
+              Or email{" "}
               <a href={`mailto:${CONTACT.email}`} className="link">
                 {CONTACT.email}
               </a>{" "}
@@ -262,8 +325,8 @@ export default function Privacy() {
 
         <Section title="Children">
           <p>
-            Lasan Mart is a business tool and is not intended for anyone under
-            18. We do not knowingly collect information from children. If you
+            Lasan Mart and Lasan Mart Hub are business tools and are not
+            intended for anyone under 18. We do not knowingly collect information from children. If you
             believe a child has provided us with information, contact us and we
             will remove it.
           </p>
@@ -318,8 +381,9 @@ function Intro() {
       <p className="text-[15px] leading-relaxed">
         <strong>The short version:</strong> we collect your name, phone number
         and email so our team can respond to the marketing requests you post. We
-        verify your phone number so nobody else can see your requests. We do not
-        sell your data, and you can ask us to delete it at any time.
+        verify your phone number so nobody else can see your requests. If you
+        join Lasan Mart Hub, we also collect the profile details we need to send
+        you work. We do not sell your data, and you can delete it at any time.
       </p>
     </div>
   );
