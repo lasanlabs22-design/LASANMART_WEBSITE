@@ -624,6 +624,81 @@ body {
   pointer-events: none;
 }
 
+/* Service icons circling the hero phone on a tilted ring. Each icon
+   undoes the ring's tilt and spin so it always faces the viewer. */
+.orbit-clip {
+  position: absolute;
+  inset: 0;
+  perspective: 1100px;
+  pointer-events: none;
+  --d: 330px;
+  --b: 34px;
+  --orbit-tilt: 72deg;
+}
+@media (min-width: 640px) {
+  .orbit-clip {
+    --d: 500px;
+    --b: 44px;
+  }
+}
+.orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--d);
+  height: var(--d);
+  margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
+  transform: rotateX(var(--orbit-tilt));
+  transform-style: preserve-3d;
+}
+.orbit-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(109, 59, 245, 0.28);
+  transform-style: preserve-3d;
+  animation: orbitSpin 36s linear infinite;
+}
+.orbit-item {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: rotate(var(--a)) translateX(calc(var(--d) / 2))
+    rotate(calc(-1 * var(--a)));
+  transform-style: preserve-3d;
+}
+.orbit-face {
+  /* Resting pose; the animation takes over while it runs */
+  transform: translate(-50%, -50%) rotateX(calc(-1 * var(--orbit-tilt)));
+  animation: orbitCounter 36s linear infinite;
+  transform-style: preserve-3d;
+}
+.orbit-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--b);
+  height: var(--b);
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(20, 16, 46, 0.06);
+  box-shadow: 0 10px 24px rgba(20, 16, 46, 0.14);
+}
+@keyframes orbitSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes orbitCounter {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) rotateX(calc(-1 * var(--orbit-tilt)));
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(-360deg)
+      rotateX(calc(-1 * var(--orbit-tilt)));
+  }
+}
+
 /* The "Powered by Lasan Labs" signature keeps Lasan's own look, as in
    Lasan People and Lasan Grow: Space Grotesk and the violet-to-cyan
    gradient, deeper shades on light backgrounds, lighter on dark ones. */

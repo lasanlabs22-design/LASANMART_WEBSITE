@@ -3,13 +3,71 @@
 import { useEffect, useRef } from "react";
 import {
   BadgeCheck,
+  Camera,
+  ChartLine,
   Heart,
+  Laptop,
   Megaphone,
+  MessageCircle,
+  Newspaper,
   Play,
+  Signpost,
+  Smartphone,
   Star,
   type LucideIcon,
 } from "lucide-react";
 import LoopVideo from "./LoopVideo";
+
+/* Services that circle the phone, in the app's tile colours */
+const ORBIT: [LucideIcon, string, string][] = [
+  [Signpost, "#E63946", "Hoardings"],
+  [Smartphone, "#C13584", "Social media"],
+  [Star, "#F2542D", "Influencers"],
+  [Camera, "#E8AE00", "Shoots"],
+  [Laptop, "#2D6CDF", "Websites"],
+  [MessageCircle, "#25D366", "WhatsApp"],
+  [Newspaper, "#495057", "Print"],
+  [ChartLine, "#7B2FF7", "SEO & Ads"],
+];
+
+/**
+ * One copy of the ring. Drawn twice, clipped to its far and near
+ * halves, so icons pass behind the phone at the back and in front of
+ * it at the front. Both copies share the same animation clock.
+ */
+function OrbitRing({ half }: { half: "back" | "front" }) {
+  return (
+    <div
+      aria-hidden
+      className="orbit-clip"
+      style={{
+        clipPath: half === "back" ? "inset(0 0 50% 0)" : "inset(50% 0 0 0)",
+      }}
+    >
+      <div className="orbit">
+        <div className="orbit-ring">
+          {ORBIT.map(([Icon, c, label], i) => (
+            <div
+              key={label}
+              className="orbit-item"
+              style={{ "--a": `${(360 / ORBIT.length) * i}deg` } as React.CSSProperties}
+            >
+              <div className="orbit-face">
+                <span
+                  className="orbit-bubble"
+                  style={{ color: c }}
+                  title={label}
+                >
+                  <Icon strokeWidth={2} className="w-[46%] h-[46%]" />
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 type Float = {
   icon?: LucideIcon;
@@ -29,7 +87,7 @@ const FLOATS: Float[] = [
     c: "#FF6B35",
     title: "New request",
     sub: "Hoardings · Tirupati",
-    pos: "left-[0%] top-[8%] sm:left-[4%] sm:top-[12%]",
+    pos: "left-[0%] top-[8%] sm:left-[4%] sm:top-[12%] lg:left-[-3%] lg:top-[34%]",
     depth: 26,
     delay: "0s",
   },
@@ -38,7 +96,7 @@ const FLOATS: Float[] = [
     c: "#6D3BF5",
     title: "Creator matched",
     sub: "Food · City page",
-    pos: "hidden sm:block right-[3%] top-[6%]",
+    pos: "hidden sm:block right-[3%] top-[6%] lg:right-[-2%] lg:top-[10%]",
     depth: 18,
     delay: "1.3s",
   },
@@ -47,7 +105,7 @@ const FLOATS: Float[] = [
     c: "#12B3A0",
     title: "In Progress",
     sub: "Our partner is on it",
-    pos: "right-[0%] top-[46%] sm:top-auto sm:right-[6%] sm:bottom-[22%]",
+    pos: "right-[0%] top-[46%] sm:top-auto sm:right-[6%] sm:bottom-[22%] lg:right-[-3%] lg:bottom-[30%]",
     depth: 32,
     delay: "0.6s",
   },
@@ -56,7 +114,7 @@ const FLOATS: Float[] = [
     c: "#0EA97A",
     title: "Quote approved",
     sub: "Work starts on your yes",
-    pos: "hidden sm:block left-[7%] bottom-[10%]",
+    pos: "hidden sm:block left-[7%] bottom-[10%] lg:left-[2%] lg:bottom-[1%]",
     depth: 22,
     delay: "2s",
   },
@@ -108,7 +166,7 @@ export default function HeroStage() {
   return (
     <div
       ref={root}
-      className="relative mx-auto mt-14 sm:mt-16 max-w-4xl h-[440px] sm:h-[540px] rise"
+      className="relative w-full mx-auto mt-14 sm:mt-16 lg:mt-0 max-w-4xl h-[440px] sm:h-[540px] lg:h-[580px] rise"
       style={{ animationDelay: "0.55s" }}
     >
       {/* Soft halo behind the phone */}
@@ -122,8 +180,10 @@ export default function HeroStage() {
         }}
       />
 
+      <OrbitRing half="back" />
+
       {/* The phone */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+      <div className="absolute z-[1] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div data-depth="10">
           <div className="phone w-[200px] sm:w-[248px] -rotate-[4deg]">
             <div className="phone-screen">
@@ -167,6 +227,10 @@ export default function HeroStage() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="absolute inset-0 z-[2] pointer-events-none">
+        <OrbitRing half="front" />
       </div>
 
       {/* Cards around it */}
