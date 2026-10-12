@@ -1,5 +1,45 @@
+import Image from "next/image";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Bell,
+  BellRing,
+  Camera,
+  Clapperboard,
+  Clock,
+  Eye,
+  FileText,
+  Handshake,
+  Heart,
+  LayoutDashboard,
+  LifeBuoy,
+  ListChecks,
+  LockKeyhole,
+  Laptop,
+  Mail,
+  MapPin,
+  MessageCircle,
+  MessageSquareText,
+  PhoneCall,
+  Scissors,
+  Star,
+  Store,
+  ThumbsUp,
+  TrendingUp,
+  UserRoundCheck,
+  Gauge,
+  Wallet,
+  CalendarCheck,
+  Check,
+  Undo2,
+} from "lucide-react";
 import Nav from "@/components/Nav";
 import Aurora from "@/components/Aurora";
+import PointerFX from "@/components/PointerFX";
+import HeroStage from "@/components/HeroStage";
+import IconTile from "@/components/IconTile";
+import LoopVideo from "@/components/LoopVideo";
+import ServiceLists from "@/components/ServiceLists";
 import Reveal from "@/components/Reveal";
 import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
@@ -7,20 +47,14 @@ import ServiceCarousel from "@/components/ServiceCarousel";
 import Faq from "@/components/Faq";
 import BusinessIdeas from "@/components/BusinessIdeas";
 import HubRoles from "@/components/HubRoles";
-import {
-  PLANS,
-  CONTACT,
-  ONLINE_SERVICES,
-  OFFLINE_SERVICES,
-  BUDGETS,
-  TIMELINES,
-} from "@/lib/site";
+import { PLANS, CONTACT, BUDGETS, TIMELINES } from "@/lib/site";
 
 export default function Home() {
   return (
     <>
       <Nav />
       <Aurora />
+      <PointerFX />
 
       {/* ==================== HERO ==================== */}
       <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 px-5 overflow-hidden z-10">
@@ -76,10 +110,11 @@ export default function Home() {
             <StoreButton />
             <a
               href="#services"
-              className="px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 transition hover:-translate-y-0.5"
-              style={{ borderColor: "var(--ink)", color: "var(--ink)" }}
+              className="nudge inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 transition hover:-translate-y-0.5 hover:bg-[var(--ink)] hover:text-white"
+              style={{ borderColor: "var(--ink)" }}
             >
               See what we do
+              <ArrowRight size={17} strokeWidth={2.2} />
             </a>
           </div>
 
@@ -90,69 +125,7 @@ export default function Home() {
             iOS version arriving soon
           </p>
 
-          {/* Floating service chips */}
-          <div className="relative mt-20 h-[220px] hidden sm:block">
-            {[
-              {
-                label: "📣 Hoardings",
-                x: "4%",
-                y: "8%",
-                tilt: "-6deg",
-                c: "var(--orange)",
-                d: "0s",
-              },
-              {
-                label: "⭐ Influencers",
-                x: "68%",
-                y: "0%",
-                tilt: "5deg",
-                c: "var(--violet)",
-                d: "1.2s",
-              },
-              {
-                label: "💼 Digital Plans",
-                x: "20%",
-                y: "58%",
-                tilt: "3deg",
-                c: "var(--ink)",
-                d: "2.1s",
-              },
-              {
-                label: "🎬 Reels",
-                x: "76%",
-                y: "52%",
-                tilt: "-4deg",
-                c: "var(--yellow)",
-                d: "0.7s",
-              },
-              {
-                label: "🛠️ Custom builds",
-                x: "42%",
-                y: "26%",
-                tilt: "-2deg",
-                c: "var(--orange)",
-                d: "1.7s",
-              },
-            ].map((chip) => (
-              <div
-                key={chip.label}
-                className="absolute card floaty px-5 py-3 text-[14px] font-semibold"
-                style={
-                  {
-                    left: chip.x,
-                    top: chip.y,
-                    "--tilt": chip.tilt,
-                    animationDelay: chip.d,
-                    borderColor: chip.c,
-                    color: chip.c === "var(--yellow)" ? "var(--ink)" : chip.c,
-                    borderWidth: 2,
-                  } as React.CSSProperties
-                }
-              >
-                {chip.label}
-              </div>
-            ))}
-          </div>
+          <HeroStage />
         </div>
       </section>
 
@@ -243,28 +216,37 @@ export default function Home() {
                 n: "01",
                 title: "Tell us what you need",
                 body: "Pick a service or describe your goal in your own words. Not sure? Browse Business Ideas for your sector.",
-                c: "var(--orange)",
+                c: "#FF6B35",
+                icon: MessageSquareText,
               },
               {
                 n: "02",
                 title: "We come back with a plan",
                 body: "Our team reviews every request and calls you within 4–6 working hours with options and costs.",
-                c: "var(--violet)",
+                c: "#6D3BF5",
+                icon: PhoneCall,
               },
               {
                 n: "03",
                 title: "Watch it happen",
                 body: "Track every request in the app. Your phone buzzes the moment the status changes.",
-                c: "var(--yellow)",
+                c: "#E8AE00",
+                icon: BellRing,
               },
             ].map((step, i) => (
               <Reveal key={step.n} delay={i * 0.1}>
-                <div className="card card-lift tilt trace p-7 h-full">
-                  <div
-                    className="display text-[40px] leading-none"
-                    style={{ color: step.c }}
-                  >
-                    {step.n}
+                <div
+                  data-spot
+                  className="group card card-lift tilt trace p-7 h-full"
+                >
+                  <div className="flex items-start justify-between">
+                    <div
+                      className="display text-[40px] leading-none"
+                      style={{ color: step.c }}
+                    >
+                      {step.n}
+                    </div>
+                    <IconTile icon={step.icon} color={step.c} size={48} />
                   </div>
                   <h3 className="display-md text-[19px] mt-5">{step.title}</h3>
                   <p
@@ -328,31 +310,33 @@ export default function Home() {
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-9">
                 {[
                   {
-                    icon: "🔔",
+                    icon: Bell,
+                    c: "#3A86FF",
                     title: "Your phone buzzes",
                     body: "A notification every time the status changes, with the full history behind the bell on Home.",
                   },
                   {
-                    icon: "🤝",
+                    icon: Handshake,
+                    c: "#12B3A0",
                     title: "See the partner's progress",
                     body: "When someone from our verified network takes the job, you see when they start and when they finish. We stay in the middle throughout.",
                   },
                   {
-                    icon: "👍",
+                    icon: ThumbsUp,
+                    c: "#E8AE00",
                     title: "One tap to say how it went",
                     body: "Went well, it was okay, or not good. Only our team sees it, and it decides who gets your next job.",
                   },
                   {
-                    icon: "🔒",
+                    icon: LockKeyhole,
+                    c: "#6D3BF5",
                     title: "Only you see your requests",
                     body: "Browse as a guest, or sign in with Google or your phone. We verify your number with a one-time code before your first request.",
                   },
                 ].map((p) => (
-                  <div key={p.title}>
-                    <div className="text-[22px]" aria-hidden>
-                      {p.icon}
-                    </div>
-                    <h3 className="display-md text-[16px] mt-2">{p.title}</h3>
+                  <div key={p.title} className="group">
+                    <IconTile icon={p.icon} color={p.c} size={42} />
+                    <h3 className="display-md text-[16px] mt-3">{p.title}</h3>
                     <p
                       className="text-[13.5px] mt-1.5 leading-relaxed"
                       style={{ color: "var(--muted)" }}
@@ -398,52 +382,7 @@ export default function Home() {
           </Reveal>
 
           {/* Every service on the app's Home screen, by name */}
-          <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mt-16">
-            {[
-              {
-                title: "Online Marketing",
-                items: ONLINE_SERVICES,
-                c: "var(--violet)",
-              },
-              {
-                title: "Offline Marketing",
-                items: OFFLINE_SERVICES,
-                c: "var(--orange)",
-              },
-            ].map((group, i) => (
-              <Reveal key={group.title} delay={i * 0.1}>
-                <div className="card p-6 sm:p-7 h-full">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <h3
-                      className="display-md text-[19px]"
-                      style={{ color: group.c }}
-                    >
-                      {group.title}
-                    </h3>
-                    <span
-                      className="text-[12.5px] font-semibold"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      {group.items.length} services
-                    </span>
-                  </div>
-                  <ul className="flex flex-wrap gap-2 mt-5">
-                    {group.items.map((s) => (
-                      <li
-                        key={s}
-                        className="text-[13px] font-medium px-3 py-1.5 rounded-xl"
-                        style={{
-                          background: `color-mix(in srgb, ${group.c} 8%, transparent)`,
-                        }}
-                      >
-                        {s}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <ServiceLists />
 
           <Reveal delay={0.2}>
             <p
@@ -535,56 +474,66 @@ export default function Home() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mt-12 sm:mt-16">
             {[
               {
-                icon: "📷",
+                icon: Camera,
                 label: "Photography",
                 body: "Products, interiors, food, events",
                 c: "#3A86FF",
+                clip: "photo",
               },
               {
-                icon: "🎥",
+                icon: Clapperboard,
                 label: "Videography",
                 body: "Shoots, coverage, reels, ads",
                 c: "#C13584",
+                clip: "video",
               },
               {
-                icon: "✂️",
+                icon: Scissors,
                 label: "Video Editing",
                 body: "Cutting, colour, subtitles, reels",
-                c: "var(--violet)",
+                c: "#6D3BF5",
+                clip: "edit",
               },
               {
-                icon: "📈",
+                icon: TrendingUp,
                 label: "Digital Marketing",
                 body: "Social media, ads, content, SEO",
                 c: "#0EA97A",
+                clip: "marketing",
               },
             ].map((f, i) => (
               <Reveal key={f.label} delay={i * 0.08}>
                 <div
-                  className="card card-lift p-4 sm:p-6 h-full group cursor-default"
+                  data-tilt="8"
+                  className="card card-lift h-full group cursor-default overflow-hidden"
                   style={{ borderColor: "var(--line)" }}
                 >
-                  <div
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center text-xl sm:text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
-                    style={{
-                      background: `color-mix(in srgb, ${f.c} 12%, transparent)`,
-                    }}
-                  >
-                    {f.icon}
+                  <div className="relative aspect-[16/11] overflow-hidden">
+                    <LoopVideo
+                      src={`/media/fl-${f.clip}.mp4`}
+                      poster={`/media/fl-${f.clip}.jpg`}
+                      className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
+                    <span className="absolute left-3 bottom-3">
+                      <IconTile icon={f.icon} color={f.c} size={38} solid />
+                    </span>
                   </div>
 
-                  <h3
-                    className="display-md text-[15.5px] sm:text-[17px] mt-4 sm:mt-5 leading-tight"
-                    style={{ color: f.c }}
-                  >
-                    {f.label}
-                  </h3>
-                  <p
-                    className="mt-2 text-[13px] sm:text-[13.5px] leading-relaxed"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {f.body}
-                  </p>
+                  <div className="p-4 sm:p-5">
+                    <h3
+                      className="display-md text-[15.5px] sm:text-[17px] leading-tight"
+                      style={{ color: f.c }}
+                    >
+                      {f.label}
+                    </h3>
+                    <p
+                      className="mt-2 text-[13px] sm:text-[13.5px] leading-relaxed"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {f.body}
+                    </p>
+                  </div>
                 </div>
               </Reveal>
             ))}
@@ -658,39 +607,81 @@ export default function Home() {
             </div>
           </Reveal>
 
+          {/* Three reels as they look in the app's feed */}
           <Reveal delay={0.12}>
-            <div className="flex gap-4 justify-center">
+            <div className="flex gap-3 sm:gap-4 justify-center items-center">
               {[
                 {
-                  h: 260,
-                  c: "linear-gradient(160deg,#FF8A3D,#F2542D)",
+                  clip: "creator",
+                  who: "techtalk.tpt",
+                  line: "Unboxing the new lineup",
+                  c: "#6D3BF5",
                   d: "0s",
+                  w: "w-[29%] max-w-[160px] mt-10",
+                  side: true,
                 },
                 {
-                  h: 300,
-                  c: "linear-gradient(160deg,#7C4DFF,#4B21C4)",
+                  clip: "fashion",
+                  who: "the.lookbook",
+                  line: "Festive lookbook, behind the scenes",
+                  c: "#FF6B35",
                   d: "1s",
+                  w: "w-[36%] max-w-[210px] z-10",
                 },
                 {
-                  h: 240,
-                  c: "linear-gradient(160deg,#FFC529,#E5A800)",
+                  clip: "chef",
+                  who: "grillhouse",
+                  line: "Live counter, all weekend",
+                  c: "#E8AE00",
                   d: "2s",
+                  w: "w-[29%] max-w-[160px] mt-10",
+                  side: true,
                 },
-              ].map((card, i) => (
+              ].map((r) => (
                 <div
-                  key={i}
-                  className="floaty rounded-[22px] flex-1 max-w-[130px] flex items-end p-4"
-                  style={{
-                    height: card.h,
-                    background: card.c,
-                    animationDelay: card.d,
-                    boxShadow: "0 20px 40px rgba(0,0,0,0.3)",
-                  }}
+                  key={r.clip}
+                  className={`floaty relative ${r.w}`}
+                  style={
+                    {
+                      animationDelay: r.d,
+                      "--tilt": "0deg",
+                    } as React.CSSProperties
+                  }
                 >
-                  <div className="w-full">
-                    <div className="w-8 h-8 rounded-full bg-white/25 mb-2" />
-                    <div className="h-2 rounded bg-white/40 w-3/4 mb-1.5" />
-                    <div className="h-2 rounded bg-white/25 w-1/2" />
+                  <div
+                    data-tilt="10"
+                    className="phone p-[5px]! rounded-[26px]!"
+                  >
+                    <div className="phone-screen rounded-[21px]!">
+                      <LoopVideo
+                        src={`/media/vibes-${r.clip}.mp4`}
+                        poster={`/media/vibes-${r.clip}.jpg`}
+                        className="absolute inset-0 w-full h-full"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75" />
+
+                      <div className="absolute right-2 bottom-16 flex flex-col items-center gap-2.5 text-white">
+                        <Heart size={17} fill="#fff" strokeWidth={0} />
+                        <Eye size={17} strokeWidth={2} />
+                      </div>
+
+                      <div
+                        className={`absolute left-2.5 right-8 bottom-3 text-white ${"side" in r ? "hidden sm:block" : ""}`}
+                      >
+                        <div className="flex items-center gap-1.5">
+                          <span
+                            className="w-5 h-5 rounded-full shrink-0"
+                            style={{ background: r.c }}
+                          />
+                          <span className="text-[10.5px] font-semibold truncate">
+                            {r.who}
+                          </span>
+                        </div>
+                        <p className="text-[10px] mt-1 leading-snug text-white/80 line-clamp-2">
+                          {r.line}
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -750,15 +741,22 @@ export default function Home() {
               return (
                 <Reveal key={plan.name} delay={i * 0.1}>
                   <div
-                    className="rounded-[24px] p-7 h-full relative tilt"
-                    style={{
-                      background: tone.bg,
-                      border: `1px solid ${tone.border}`,
-                      boxShadow:
-                        plan.tone === "violet"
-                          ? "0 24px 50px rgba(75,33,196,0.26)"
-                          : "0 4px 16px rgba(20,16,46,0.05)",
-                    }}
+                    data-spot
+                    className={`rounded-[24px] p-7 h-full relative tilt ${plan.tone === "violet" ? "glow-ring" : ""}`}
+                    style={
+                      {
+                        "--spot":
+                          plan.tone === "orange"
+                            ? "rgba(255,107,53,0.08)"
+                            : "rgba(255,255,255,0.1)",
+                        background: tone.bg,
+                        border: `1px solid ${tone.border}`,
+                        boxShadow:
+                          plan.tone === "violet"
+                            ? "0 24px 50px rgba(75,33,196,0.26)"
+                            : "0 4px 16px rgba(20,16,46,0.05)",
+                      } as React.CSSProperties
+                    }
                   >
                     {plan.badge && (
                       <span
@@ -829,13 +827,16 @@ export default function Home() {
                           className="flex items-start gap-2.5 text-[14px]"
                           style={{ color: tone.text, opacity: 0.85 }}
                         >
-                          <svg
-                            viewBox="0 0 24 24"
-                            fill={tone.accent}
-                            className="w-4 h-4 shrink-0 mt-0.5"
+                          <span
+                            aria-hidden
+                            className="w-[18px] h-[18px] shrink-0 mt-px rounded-full flex items-center justify-center"
+                            style={{
+                              background: `color-mix(in srgb, ${tone.accent} 18%, transparent)`,
+                              color: tone.accent,
+                            }}
                           >
-                            <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z" />
-                          </svg>
+                            <Check size={11} strokeWidth={3.2} />
+                          </span>
                           {f}
                         </li>
                       ))}
@@ -931,21 +932,24 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {[
               {
-                icon: "📄",
+                icon: FileText,
+                tile: "#FF6B35",
                 title: "Quotation Generator",
                 body: "Auto-numbered quotations with your company logo as a watermark, line items, GST (18% unless you change it) and a validity period. Send the PDF on WhatsApp or email, or print it, in under a minute.",
                 tag: "Free",
                 c: "var(--orange)",
               },
               {
-                icon: "🕐",
+                icon: CalendarCheck,
+                tile: "#6D3BF5",
                 title: "Attendance Management",
                 body: "Mark staff attendance with a tap, track leaves and shifts, pull monthly reports at salary time.",
                 tag: "Custom build",
                 c: "var(--violet)",
               },
               {
-                icon: "📊",
+                icon: LayoutDashboard,
+                tile: "#2D3561",
                 title: "Customised CRM",
                 body: "Built around how your business actually runs — your fields, your stages, your reports.",
                 tag: "Custom build",
@@ -953,13 +957,11 @@ export default function Home() {
               },
             ].map((tool, i) => (
               <Reveal key={tool.title} delay={i * 0.1}>
-                <div className="card card-lift tilt trace p-7 h-full">
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
-                    style={{ background: "rgba(20,16,46,0.04)" }}
-                  >
-                    {tool.icon}
-                  </div>
+                <div
+                  data-spot
+                  className="group card card-lift tilt trace p-7 h-full"
+                >
+                  <IconTile icon={tool.icon} color={tool.tile} size={56} />
 
                   <span
                     className="inline-block mt-5 text-[11px] font-bold px-2.5 py-1 rounded-md"
@@ -1067,21 +1069,21 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-5 mt-16">
             {[
               {
-                icon: "⭐",
+                icon: Star,
                 role: "Creators",
                 line: "Instagram, YouTube, city pages",
                 body: "Set your rate once. Businesses browse creators by category and city, and we bring you the brief.",
                 c: "#C13584",
               },
               {
-                icon: "🏪",
+                icon: Store,
                 role: "Vendors",
                 line: "Hoardings, print, events, field teams",
                 body: "When a client needs what you offer, our team comes to the vendors on this list first.",
                 c: "#0EA97A",
               },
               {
-                icon: "💻",
+                icon: Laptop,
                 role: "Freelancers",
                 line: "Design, video, photography, marketing",
                 body: "No bidding wars, no undercutting. Scoped briefs, priced before they reach you.",
@@ -1090,20 +1092,17 @@ export default function Home() {
             ].map((r, i) => (
               <Reveal key={r.role} delay={i * 0.1}>
                 <div
+                  data-spot
                   className="rounded-[24px] p-7 h-full group transition-all duration-300 hover:-translate-y-2"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
+                  style={
+                    {
+                      "--spot": "rgba(255,255,255,0.08)",
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    } as React.CSSProperties
+                  }
                 >
-                  <div
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110"
-                    style={{
-                      background: `color-mix(in srgb, ${r.c} 22%, transparent)`,
-                    }}
-                  >
-                    {r.icon}
-                  </div>
+                  <IconTile icon={r.icon} color={r.c} size={56} dark />
 
                   <h3
                     className="display-md text-[21px] mt-6"
@@ -1178,47 +1177,70 @@ export default function Home() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
             {[
               {
+                icon: Wallet,
                 title: "Free to join, and stays free",
                 body: "We take our margin from what the client pays, not from you.",
               },
               {
+                icon: UserRoundCheck,
                 title: "A real person approves you",
                 body: "Usually within a day or two. Edit your profile later and it goes back for a quick re-check, so verified always means verified.",
               },
               {
+                icon: Undo2,
                 title: "Accept or decline every job",
                 body: "Offers land in your Work tab with a notification. Declining never counts against you; just tell us why.",
               },
               {
+                icon: BadgeCheck,
                 title: "Paid once it's done",
                 body: "We agree the amount with you before the job starts and pay once the work is complete and the client is happy.",
               },
               {
+                icon: Handshake,
                 title: "We handle the client",
                 body: "You see their first name and the brief. Everything else goes through our team, so you never chase anyone.",
               },
               {
+                icon: ListChecks,
                 title: "Mark progress as you go",
                 body: "Accepted, in progress, completed. Each step reaches the business in Lasan Mart the moment you tap it.",
               },
               {
+                icon: Gauge,
                 title: "A profile that tells you what's missing",
                 body: "Profile strength shows exactly which details would help our team place more work with you.",
               },
               {
+                icon: LifeBuoy,
                 title: "Support built in",
                 body: "Raise a question about payment, your profile or availability from the app and follow it until it's resolved.",
               },
             ].map((p, i) => (
               <Reveal key={p.title} delay={Math.min(i, 4) * 0.06}>
                 <div
-                  className="rounded-[20px] p-5 h-full"
-                  style={{
-                    background: "rgba(255,255,255,0.04)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                  }}
+                  data-spot
+                  className="group rounded-[20px] p-5 h-full transition-transform duration-300 hover:-translate-y-1"
+                  style={
+                    {
+                      "--spot": "rgba(255,197,41,0.08)",
+                      background: "rgba(255,255,255,0.04)",
+                      border: "1px solid rgba(255,255,255,0.1)",
+                    } as React.CSSProperties
+                  }
                 >
-                  <h3 className="text-white text-[15px] font-semibold">
+                  <span
+                    className="icon-tile w-10 h-10 text-[var(--yellow)]"
+                    style={
+                      {
+                        "--tile": "#FFC529",
+                        background: "rgba(255,197,41,0.12)",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <p.icon size={19} strokeWidth={1.9} aria-hidden />
+                  </span>
+                  <h3 className="text-white text-[15px] font-semibold mt-3">
                     {p.title}
                   </h3>
                   <p className="text-white/55 text-[13.5px] leading-relaxed mt-2">
@@ -1373,13 +1395,18 @@ export default function Home() {
                           opacity: 0.85,
                         }}
                       >
-                        <svg
-                          viewBox="0 0 24 24"
-                          fill={app.dark ? "var(--yellow)" : "var(--orange)"}
-                          className="w-4 h-4 shrink-0 mt-0.5"
+                        <span
+                          aria-hidden
+                          className="w-[18px] h-[18px] shrink-0 mt-px rounded-full flex items-center justify-center"
+                          style={{
+                            background: app.dark
+                              ? "rgba(255,197,41,0.2)"
+                              : "rgba(255,107,53,0.12)",
+                            color: app.dark ? "var(--yellow)" : "var(--orange)",
+                          }}
                         >
-                          <path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2Z" />
-                        </svg>
+                          <Check size={11} strokeWidth={3.2} />
+                        </span>
                         {p}
                       </li>
                     ))}
@@ -1538,31 +1565,37 @@ export default function Home() {
               <StoreButton />
               <a
                 href={`tel:+91${CONTACT.phone}`}
-                className="px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 text-white transition hover:-translate-y-0.5 hover:bg-white/10"
                 style={{ borderColor: "rgba(255,255,255,0.25)" }}
               >
+                <PhoneCall size={17} aria-hidden />
                 Call {CONTACT.phone}
               </a>
               <a
                 href={`https://wa.me/91${CONTACT.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 text-white transition hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 text-white transition hover:-translate-y-0.5 hover:bg-white/10"
                 style={{ borderColor: "rgba(37,211,102,0.55)" }}
               >
+                <MessageCircle size={17} aria-hidden />
                 WhatsApp us
               </a>
             </div>
 
             <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-14 text-[14px] text-white/45">
-              <span>📍 {CONTACT.city}</span>
+              <span className="inline-flex items-center gap-2">
+                <MapPin size={15} aria-hidden /> {CONTACT.city}
+              </span>
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="hover:text-white/80"
+                className="inline-flex items-center gap-2 hover:text-white/80"
               >
-                ✉️ {CONTACT.email}
+                <Mail size={15} aria-hidden /> {CONTACT.email}
               </a>
-              <span>🕐 Mon–Sat, 9am–7pm</span>
+              <span className="inline-flex items-center gap-2">
+                <Clock size={15} aria-hidden /> Mon–Sat, 9am–7pm
+              </span>
             </div>
           </Reveal>
         </div>
@@ -1578,14 +1611,13 @@ export default function Home() {
       >
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-items-center md:justify-items-stretch gap-5 md:gap-4 text-center md:text-left">
           <div className="flex items-center gap-2.5">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center"
-              style={{ background: "linear-gradient(135deg,#FF8A3D,#F2542D)" }}
-            >
-              <svg viewBox="0 0 24 24" fill="white" className="w-3.5 h-3.5">
-                <path d="M17 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM7 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM7.2 14.6 7 15a1 1 0 0 0 1 1h12v-2H8.4l1.1-2H17a2 2 0 0 0 1.8-1L22 5H6.2l-.9-2H2v2h2l3.6 7.6-1.4 2Z" />
-              </svg>
-            </div>
+            <Image
+              src="/brand/mark.png"
+              alt=""
+              width={34}
+              height={34}
+              className="w-[34px] h-[34px]"
+            />
             <span className="text-white/80 text-[13px] tracking-[0.14em] font-semibold">
               LASAN MART
             </span>
