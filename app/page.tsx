@@ -58,10 +58,16 @@ export default function Home() {
       <PointerFX />
 
       {/* ==================== HERO ==================== */}
-      <section className="relative pt-28 sm:pt-36 pb-16 sm:pb-24 px-5 overflow-hidden z-10">
+      <section
+        data-spot
+        className="relative pt-28 sm:pt-36 lg:pt-28 pb-16 sm:pb-24 lg:pb-16 px-5 overflow-hidden z-10"
+        style={{ "--spot": "rgba(109,59,245,0.07)" } as React.CSSProperties}
+      >
         <div className="absolute inset-0 grid-bg" />
 
-        <div className="relative max-w-5xl mx-auto text-center">
+        {/* Words on the left, the moving stage on the right from laptops up */}
+        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_1fr] lg:gap-6 items-center">
+          <div className="relative z-[2] text-center lg:text-left">
           <div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 rise"
             style={{
@@ -81,10 +87,7 @@ export default function Home() {
             </span>
           </div>
 
-          <h1
-            className="display"
-            style={{ fontSize: "clamp(40px, 8vw, 82px)" }}
-          >
+          <h1 className="display text-[clamp(40px,8vw,82px)] lg:text-[clamp(56px,5.4vw,78px)]">
             <span className="mask-line">
               <span style={{ animationDelay: "0.1s" }}>Marketing that</span>
             </span>
@@ -96,7 +99,7 @@ export default function Home() {
           </h1>
 
           <p
-            className="max-w-xl mx-auto mt-7 text-[17px] leading-relaxed rise"
+            className="max-w-xl mx-auto lg:mx-0 mt-7 text-[17px] leading-relaxed rise"
             style={{ color: "var(--muted)", animationDelay: "0.36s" }}
           >
             Hoardings, Instagram, influencers, websites, print — tell us what
@@ -105,7 +108,7 @@ export default function Home() {
           </p>
 
           <div
-            className="flex flex-wrap items-center justify-center gap-4 mt-10 rise"
+            className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-10 rise"
             style={{ animationDelay: "0.44s" }}
           >
             <StoreButton />
@@ -125,6 +128,7 @@ export default function Home() {
           >
             iOS version arriving soon
           </p>
+          </div>
 
           <HeroStage />
         </div>
