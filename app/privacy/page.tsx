@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONTACT } from "@/lib/site";
+import PoweredBy from "@/components/PoweredBy";
 
 export const metadata = {
   title: "Privacy Policy — Lasan Mart",
@@ -356,12 +357,16 @@ export default function Privacy() {
           </div>
         </Section>
 
-        <p
-          className="text-[13px] text-center mt-16 pt-8 border-t"
+        <div
+          className="text-[13px] mt-16 pt-8 border-t flex flex-col sm:flex-row items-center sm:items-baseline justify-between gap-3"
           style={{ color: "var(--muted)", borderColor: "var(--line)" }}
         >
-          © {new Date().getFullYear()} Lasan Media Works. All rights reserved.
-        </p>
+          <p>
+            © {new Date().getFullYear()} Lasan Media Works. All rights
+            reserved.
+          </p>
+          <PoweredBy />
+        </div>
       </div>
     </main>
   );

@@ -40,6 +40,7 @@ import HeroStage from "@/components/HeroStage";
 import IconTile from "@/components/IconTile";
 import LoopVideo from "@/components/LoopVideo";
 import ServiceLists from "@/components/ServiceLists";
+import PoweredBy from "@/components/PoweredBy";
 import Reveal from "@/components/Reveal";
 import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
@@ -1603,36 +1604,65 @@ export default function Home() {
 
       {/* ==================== FOOTER ==================== */}
       <footer
-        className="relative z-10 py-10 px-5 border-t"
+        className="relative z-10 pt-12 pb-8 px-5 border-t"
         style={{
           background: "var(--ink)",
           borderColor: "rgba(255,255,255,0.08)",
         }}
       >
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center justify-items-center md:justify-items-stretch gap-5 md:gap-4 text-center md:text-left">
-          <div className="flex items-center gap-2.5">
-            <Image
-              src="/brand/mark.png"
-              alt=""
-              width={34}
-              height={34}
-              className="w-[34px] h-[34px]"
-            />
-            <span className="text-white/80 text-[13px] tracking-[0.14em] font-semibold">
-              LASAN MART
-            </span>
+        <div className="on-dark max-w-5xl mx-auto">
+          {/* Who we are, and where to go next */}
+          <div className="flex flex-col md:flex-row items-center md:items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/brand/mark.png"
+                alt=""
+                width={40}
+                height={40}
+                className="w-10 h-10"
+              />
+              <div className="text-center md:text-left leading-tight">
+                <p className="text-white text-[14px] tracking-[0.14em] font-semibold">
+                  LASAN MART
+                </p>
+                <p className="text-white/45 text-[12.5px] mt-1">
+                  A Lasan Media Works product
+                </p>
+              </div>
+            </div>
+
+            <nav
+              aria-label="Footer"
+              className="flex flex-wrap items-baseline justify-center gap-x-6 gap-y-2 text-[13px] text-white/55"
+            >
+              {[
+                { href: "#services", label: "Services" },
+                { href: "#plans", label: "Plans" },
+                { href: "#hub", label: "Lasan Mart Hub" },
+                { href: "#faq", label: "FAQ" },
+                { href: "/privacy", label: "Privacy Policy" },
+              ].map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  className="hover:text-white transition-colors"
+                >
+                  {l.label}
+                </a>
+              ))}
+            </nav>
           </div>
 
-          <p className="text-[12.5px] tracking-[0.04em] text-white/40 md:text-center">
-            Powered by{" "}
-            <span className="font-semibold text-white/70">Lasan Labs</span>
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-6 gap-y-2 text-[13px] text-white/40">
-            <a href="/privacy" className="hover:text-white/70">
-              Privacy Policy
-            </a>
-            <span>© {new Date().getFullYear()} Lasan Media Works</span>
+          {/* One line, one baseline: rights on the left, credit on the right */}
+          <div
+            className="mt-8 pt-6 border-t flex flex-col md:flex-row items-center md:items-baseline justify-between gap-3 text-[13px] text-white/45"
+            style={{ borderColor: "rgba(255,255,255,0.08)" }}
+          >
+            <p>
+              © {new Date().getFullYear()} Lasan Media Works. All rights
+              reserved.
+            </p>
+            <PoweredBy />
           </div>
         </div>
       </footer>
