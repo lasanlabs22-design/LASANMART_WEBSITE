@@ -93,7 +93,7 @@ export default function Nav() {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const onResize = () => window.innerWidth >= 768 && setOpen(false);
+    const onResize = () => window.innerWidth >= 1024 && setOpen(false);
     document.addEventListener("keydown", onKey);
     window.addEventListener("resize", onResize);
     document.body.style.overflow = "hidden";
@@ -140,7 +140,7 @@ export default function Nav() {
           </span>
         </a>
 
-        <nav className="hidden md:flex items-center gap-1 relative">
+        <nav className="hidden lg:flex items-center gap-1 relative">
           <span
             aria-hidden
             className="absolute top-0 bottom-0 left-0 rounded-lg nav-pill"
@@ -158,7 +158,7 @@ export default function Nav() {
                 linkRefs.current[l.href] = el;
               }}
               aria-current={active === l.href ? "true" : undefined}
-              className="relative px-4 py-2 rounded-lg text-[14px] font-medium transition-colors hover:bg-black/[0.04]"
+              className="relative px-3 xl:px-4 py-2 rounded-lg text-[14px] font-medium whitespace-nowrap transition-colors hover:bg-black/[0.04]"
               style={{
                 color: active === l.href ? "var(--ink)" : "var(--muted)",
               }}
@@ -168,14 +168,14 @@ export default function Nav() {
           ))}
         </nav>
 
-        <div className="hidden md:block scale-90 origin-right">
+        <div className="hidden lg:block scale-90 origin-right">
           <StoreButton />
         </div>
 
         <button
           type="button"
           onClick={() => setOpen((v) => !v)}
-          className="md:hidden w-10 h-10 rounded-xl flex items-center justify-center"
+          className="lg:hidden w-10 h-10 rounded-xl flex items-center justify-center"
           style={{ background: "rgba(20,16,46,0.05)" }}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -194,7 +194,7 @@ export default function Nav() {
       {open && (
         <nav
           id="mobile-menu"
-          className="md:hidden px-5 pb-6 max-h-[calc(100dvh-64px)] overflow-y-auto"
+          className="lg:hidden px-5 pb-6 max-h-[calc(100dvh-64px)] overflow-y-auto"
         >
           {LINKS.map((l, i) => (
             <a
