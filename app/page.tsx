@@ -1231,7 +1231,17 @@ export default function Home() {
 
           <Reveal delay={0.4}>
             <p className="text-center text-white/40 text-[14px] mt-10">
-              Want to join when it opens? Call us on{" "}
+              Want to join when it opens? Call or{" "}
+              <a
+                href={`https://wa.me/91${CONTACT.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold hover:text-white/70"
+                style={{ color: "var(--yellow)" }}
+              >
+                WhatsApp
+              </a>{" "}
+              us on{" "}
               <a
                 href={`tel:+91${CONTACT.phone}`}
                 className="font-semibold hover:text-white/70"
@@ -1532,6 +1542,15 @@ export default function Home() {
                 style={{ borderColor: "rgba(255,255,255,0.25)" }}
               >
                 Call {CONTACT.phone}
+              </a>
+              <a
+                href={`https://wa.me/91${CONTACT.phone}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 text-white transition hover:-translate-y-0.5"
+                style={{ borderColor: "rgba(37,211,102,0.55)" }}
+              >
+                WhatsApp us
               </a>
             </div>
 
