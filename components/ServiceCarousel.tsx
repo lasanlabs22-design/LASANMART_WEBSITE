@@ -36,11 +36,11 @@ const SLIDES: Slide[] = [
   {
     eyebrow: "Creators",
     title: "Influencer Campaigns",
-    body: "Forty-six local creators across fashion, food, fitness and city pages. Pick by budget, we handle the rest.",
+    body: "Browse verified local creators by what they post about and where they are. See their following and rate per post, pick as many as you like, and we handle the brief and the negotiating.",
     tags: [
-      "46 creators",
-      "Budget filters",
-      "Rate transparency",
+      "Verified creators",
+      "Category & city filters",
+      "Rate per post shown",
       "We negotiate",
     ],
     gradient: "linear-gradient(150deg, #FFC529, #E5A800)",

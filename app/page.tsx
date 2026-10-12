@@ -195,7 +195,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4 text-center">
           {[
             { n: 30, s: "", label: "Services" },
-            { n: 46, s: "", label: "Local creators" },
+            { n: 20, s: "", label: "Business sectors" },
             { n: 6, s: "hr", label: "Typical response" },
           ].map((stat, i) => (
             <Reveal key={stat.label} delay={i * 0.1}>
@@ -435,12 +435,23 @@ export default function Home() {
             </h2>
             <p className="text-white/60 text-[16px] leading-relaxed mt-5 max-w-md">
               A short-video feed inside the app where local businesses share
-              shoots, launches and campaigns as they happen. Post your own in
-              seconds — everyone using Lasan Mart sees it.
+              shoots, launches and campaigns as they happen. Watch as much as
+              you like, and like what you enjoy.
+            </p>
+            <p className="text-white/60 text-[16px] leading-relaxed mt-4 max-w-md">
+              Want to post? Vibes is seen by everyone using Lasan Mart, so our
+              team checks who posts. Tell us what you&apos;d share, and once
+              you&apos;re approved your videos go live the moment you post
+              them. Edit captions or delete your videos any time from My Vibes.
             </p>
 
             <div className="flex flex-wrap gap-3 mt-8">
-              {["Post in seconds", "Seen by every user", "Free forever"].map(
+              {[
+                "Free to watch",
+                "Seen by every user",
+                "Up to 90 seconds",
+                "Likes and views",
+              ].map(
                 (t) => (
                   <span
                     key={t}
@@ -1021,7 +1032,7 @@ export default function Home() {
                 line: "For anyone who wants to be seen.",
                 points: [
                   "Ask for any of our 30 services",
-                  "Watch and post on Lasan Vibes",
+                  "Watch Lasan Vibes, and post once approved",
                   "Use free tools like the Quotation Generator",
                 ],
                 dark: false,
@@ -1125,10 +1136,10 @@ export default function Home() {
                   Your work belongs on Lasan Vibes.
                 </h3>
                 <p className="text-white/60 text-[15px] leading-relaxed mt-4 max-w-md">
-                  Lasan Vibes lives inside Lasan Mart. Install it alongside Hub
-                  and post your shoots, reels and finished jobs where every
-                  Lasan Mart user sees them — the easiest way to show
-                  businesses what you can do.
+                  Lasan Vibes lives inside Lasan Mart. Install it alongside Hub,
+                  ask to post, and share your shoots, reels and finished jobs
+                  where every Lasan Mart user sees them. It&apos;s the easiest
+                  way to show businesses what you can do.
                 </p>
                 <div className="mt-7">
                   <StoreButton />
