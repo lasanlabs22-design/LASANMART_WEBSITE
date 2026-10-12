@@ -30,7 +30,7 @@ const QUESTIONS = [
   },
   {
     q: "How do the plans differ from posting a single request?",
-    a: "A plan bundles several services over three months at a fixed price — useful if you want steady marketing rather than one campaign. A single request is exactly that: one job, quoted on its own.",
+    a: "A plan bundles reels, posters, ads and management into a fixed monthly price, useful if you want steady marketing rather than one campaign. A single request is exactly that: one job, quoted on its own.",
   },
   {
     q: "What is Lasan Mart Hub, and should I be on it?",

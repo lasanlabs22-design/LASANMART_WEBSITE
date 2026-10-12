@@ -577,8 +577,14 @@ export default function Home() {
                     >
                       {plan.name}
                     </p>
+                    <p
+                      className="text-[13px] mt-1.5"
+                      style={{ color: tone.text, opacity: 0.6 }}
+                    >
+                      {plan.subtitle}
+                    </p>
 
-                    <div className="flex items-end gap-2 mt-3">
+                    <div className="flex items-end gap-2 mt-4">
                       <span
                         className="display text-[36px]"
                         style={{ color: tone.text }}
@@ -590,6 +596,18 @@ export default function Home() {
                         style={{ color: tone.text, opacity: 0.55 }}
                       >
                         / {plan.duration}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2.5 mt-2 text-[13px]">
+                      <s style={{ color: tone.text, opacity: 0.45 }}>
+                        {plan.strikePrice}
+                      </s>
+                      <span
+                        className="font-bold"
+                        style={{ color: tone.accent }}
+                      >
+                        {plan.savings}
                       </span>
                     </div>
 
@@ -627,13 +645,62 @@ export default function Home() {
             })}
           </div>
 
+          {/* What the app tells someone at the foot of the plan enquiry */}
+          <Reveal delay={0.2}>
+            <div className="card p-6 sm:p-8 mt-10">
+              <p
+                className="eyebrow text-center"
+                style={{ color: "var(--violet)" }}
+              >
+                What happens when you enquire
+              </p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-7">
+                {[
+                  {
+                    title: "An enquiry, not an order",
+                    body: "Nothing is booked and nothing is charged. You are asking us to get in touch.",
+                  },
+                  {
+                    title: "We call you back",
+                    body: "Usually within one working day, to go through what you need and what the plan covers.",
+                  },
+                  {
+                    title: "The plan can be adjusted",
+                    body: "If something in it does not suit your business, we change it before anything is agreed.",
+                  },
+                  {
+                    title: "You approve the cost first",
+                    body: "Work begins only once you have seen the final quote and said yes.",
+                  },
+                ].map((p, i) => (
+                  <div key={p.title}>
+                    <div
+                      className="display text-[22px] leading-none"
+                      style={{ color: "var(--orange)" }}
+                    >
+                      0{i + 1}
+                    </div>
+                    <h3 className="display-md text-[16px] mt-3">{p.title}</h3>
+                    <p
+                      className="text-[13.5px] mt-1.5 leading-relaxed"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {p.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
           <Reveal delay={0.3}>
             <p
               className="text-center mt-10 text-[14px]"
               style={{ color: "var(--muted)" }}
             >
-              Need something else? Post a custom requirement in the app and
-              we&apos;ll scope it for you.
+              Not sure which plan fits? Ask us and we will tell you honestly.
+              Need something else entirely? Post a custom requirement in the
+              app and we&apos;ll scope it for you.
             </p>
           </Reveal>
         </div>
