@@ -5,6 +5,7 @@ import StoreButton from "./StoreButton";
 
 const LINKS = [
   { href: "#services", label: "Services" },
+  { href: "#ideas", label: "Business Ideas" },
   { href: "#freelancers", label: "Freelancers" },
   { href: "#vibes", label: "Lasan Vibes" },
   { href: "#plans", label: "Plans" },
