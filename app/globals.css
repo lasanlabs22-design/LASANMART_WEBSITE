@@ -391,6 +391,7 @@ body {
 [data-reveal] .ticks li:nth-child(3) { transition-delay: calc(var(--reveal-delay, 0s) + 0.46s); }
 [data-reveal] .ticks li:nth-child(4) { transition-delay: calc(var(--reveal-delay, 0s) + 0.54s); }
 [data-reveal] .ticks li:nth-child(5) { transition-delay: calc(var(--reveal-delay, 0s) + 0.62s); }
+[data-reveal] .ticks li:nth-child(6) { transition-delay: calc(var(--reveal-delay, 0s) + 0.7s); }
 
 /* "How a job travels" — each step lights up in turn, on a loop */
 @keyframes flowStep {
