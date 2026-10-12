@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import StoreButton from "./StoreButton";
 
 const LINKS = [
@@ -126,16 +127,20 @@ export default function Nav() {
       />
 
       <div className="max-w-6xl mx-auto px-5 h-16 md:h-[70px] flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2.5" aria-label="Lasan Mart home">
-          <div
-            className="w-9 h-9 rounded-xl flex items-center justify-center"
-            style={{ background: "linear-gradient(135deg,#FF8A3D,#F2542D)" }}
-          >
-            <svg viewBox="0 0 24 24" fill="white" className="w-4 h-4" aria-hidden>
-              <path d="M17 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM7 18a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM7.2 14.6 7 15a1 1 0 0 0 1 1h12v-2H8.4l1.1-2H17a2 2 0 0 0 1.8-1L22 5H6.2l-.9-2H2v2h2l3.6 7.6-1.4 2Z" />
-            </svg>
-          </div>
-          <span className="display-md text-[15px] sm:text-[16px] tracking-[0.14em]">
+        <a
+          href="#"
+          className="flex items-center gap-2.5"
+          aria-label="Lasan Mart home"
+        >
+          <Image
+            src="/brand/mark.png"
+            alt=""
+            width={40}
+            height={40}
+            preload
+            className="w-10 h-10 transition-transform duration-300 hover:-rotate-6"
+          />
+          <span className="display-md text-[15px] sm:text-[16px] tracking-[0.14em] whitespace-nowrap">
             LASAN MART
           </span>
         </a>
