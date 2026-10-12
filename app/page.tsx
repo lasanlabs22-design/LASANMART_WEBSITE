@@ -6,6 +6,7 @@ import StoreButton from "@/components/StoreButton";
 import ServiceCarousel from "@/components/ServiceCarousel";
 import Faq from "@/components/Faq";
 import BusinessIdeas from "@/components/BusinessIdeas";
+import HubRoles from "@/components/HubRoles";
 import {
   PLANS,
   CONTACT,
@@ -1069,7 +1070,7 @@ export default function Home() {
                 icon: "⭐",
                 role: "Creators",
                 line: "Instagram, YouTube, city pages",
-                body: "Set your rate once. Businesses browse by budget and category, and we bring you the brief.",
+                body: "Set your rate once. Businesses browse creators by category and city, and we bring you the brief.",
                 c: "#C13584",
               },
               {
@@ -1168,6 +1169,65 @@ export default function Home() {
               </ol>
             </div>
           </Reveal>
+
+          <Reveal delay={0.1}>
+            <HubRoles />
+          </Reveal>
+
+          {/* The partner terms, as the Hub app's FAQ states them */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+            {[
+              {
+                title: "Free to join, and stays free",
+                body: "We take our margin from what the client pays, not from you.",
+              },
+              {
+                title: "A real person approves you",
+                body: "Usually within a day or two. Edit your profile later and it goes back for a quick re-check, so verified always means verified.",
+              },
+              {
+                title: "Accept or decline every job",
+                body: "Offers land in your Work tab with a notification. Declining never counts against you; just tell us why.",
+              },
+              {
+                title: "Paid once it's done",
+                body: "We agree the amount with you before the job starts and pay once the work is complete and the client is happy.",
+              },
+              {
+                title: "We handle the client",
+                body: "You see their first name and the brief. Everything else goes through our team, so you never chase anyone.",
+              },
+              {
+                title: "Mark progress as you go",
+                body: "Accepted, in progress, completed. Each step reaches the business in Lasan Mart the moment you tap it.",
+              },
+              {
+                title: "A profile that tells you what's missing",
+                body: "Profile strength shows exactly which details would help our team place more work with you.",
+              },
+              {
+                title: "Support built in",
+                body: "Raise a question about payment, your profile or availability from the app and follow it until it's resolved.",
+              },
+            ].map((p, i) => (
+              <Reveal key={p.title} delay={Math.min(i, 4) * 0.06}>
+                <div
+                  className="rounded-[20px] p-5 h-full"
+                  style={{
+                    background: "rgba(255,255,255,0.04)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                  }}
+                >
+                  <h3 className="text-white text-[15px] font-semibold">
+                    {p.title}
+                  </h3>
+                  <p className="text-white/55 text-[13.5px] leading-relaxed mt-2">
+                    {p.body}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
 
           <Reveal delay={0.4}>
             <p className="text-center text-white/40 text-[14px] mt-10">
