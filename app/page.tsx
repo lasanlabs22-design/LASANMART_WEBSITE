@@ -276,6 +276,93 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          {/* What My Requests shows, in the app's own status words */}
+          <Reveal delay={0.2}>
+            <div className="card p-6 sm:p-8 mt-8">
+              <p
+                className="eyebrow text-center"
+                style={{ color: "var(--violet)" }}
+              >
+                Your request, start to finish
+              </p>
+
+              <ol className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 mt-6">
+                {[
+                  { label: "Received", c: "#3A86FF" },
+                  { label: "Contacted", c: "#E8AE00" },
+                  { label: "In Progress", c: "#12B3A0" },
+                  { label: "Completed", c: "#767676" },
+                ].map((s, i, arr) => (
+                  <li
+                    key={s.label}
+                    className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3"
+                  >
+                    <span
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl text-[13.5px] font-semibold"
+                      style={{
+                        background: `color-mix(in srgb, ${s.c} 12%, transparent)`,
+                      }}
+                    >
+                      <span
+                        className="w-2 h-2 rounded-full"
+                        style={{ background: s.c }}
+                      />
+                      {s.label}
+                    </span>
+                    {i < arr.length - 1 && (
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="var(--muted)"
+                        className="w-4 h-4 shrink-0 rotate-90 sm:rotate-0 opacity-50"
+                        aria-hidden
+                      >
+                        <path d="m10 17 5-5-5-5v10Z" />
+                      </svg>
+                    )}
+                  </li>
+                ))}
+              </ol>
+
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-9">
+                {[
+                  {
+                    icon: "🔔",
+                    title: "Your phone buzzes",
+                    body: "A notification every time the status changes, with the full history behind the bell on Home.",
+                  },
+                  {
+                    icon: "🤝",
+                    title: "See the partner's progress",
+                    body: "When someone from our verified network takes the job, you see when they start and when they finish. We stay in the middle throughout.",
+                  },
+                  {
+                    icon: "👍",
+                    title: "One tap to say how it went",
+                    body: "Went well, it was okay, or not good. Only our team sees it, and it decides who gets your next job.",
+                  },
+                  {
+                    icon: "🔒",
+                    title: "Only you see your requests",
+                    body: "Browse as a guest, or sign in with Google or your phone. We verify your number with a one-time code before your first request.",
+                  },
+                ].map((p) => (
+                  <div key={p.title}>
+                    <div className="text-[22px]" aria-hidden>
+                      {p.icon}
+                    </div>
+                    <h3 className="display-md text-[16px] mt-2">{p.title}</h3>
+                    <p
+                      className="text-[13.5px] mt-1.5 leading-relaxed"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {p.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -845,7 +932,7 @@ export default function Home() {
               {
                 icon: "📄",
                 title: "Quotation Generator",
-                body: "Branded quotations with your logo, GST and line items. Share as a PDF on WhatsApp in under a minute.",
+                body: "Auto-numbered quotations with your company logo as a watermark, line items, GST (18% unless you change it) and a validity period. Send the PDF on WhatsApp or email, or print it, in under a minute.",
                 tag: "Free",
                 c: "var(--orange)",
               },
@@ -894,6 +981,17 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={0.3}>
+            <p
+              className="text-center mt-10 text-[14px] max-w-xl mx-auto leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Attendance and CRM are built for you, not off the shelf. Tell us
+              how your business runs and every build comes with setup, training
+              and ongoing support from our team.
+            </p>
+          </Reveal>
         </div>
       </section>
 
