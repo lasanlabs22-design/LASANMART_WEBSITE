@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   ArrowRight,
   BadgeCheck,
-  Bell,
   BellRing,
   Camera,
   Clapperboard,
@@ -14,7 +13,6 @@ import {
   LayoutDashboard,
   LifeBuoy,
   ListChecks,
-  LockKeyhole,
   Laptop,
   Mail,
   MapPin,
@@ -24,7 +22,6 @@ import {
   Scissors,
   Star,
   Store,
-  ThumbsUp,
   TrendingUp,
   UserRoundCheck,
   Gauge,
@@ -41,6 +38,7 @@ import IconTile from "@/components/IconTile";
 import LoopVideo from "@/components/LoopVideo";
 import ServiceLists from "@/components/ServiceLists";
 import PoweredBy from "@/components/PoweredBy";
+import RequestJourney from "@/components/RequestJourney";
 import Reveal from "@/components/Reveal";
 import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
@@ -265,94 +263,28 @@ export default function Home() {
             ))}
           </div>
 
-          {/* What My Requests shows, in the app's own status words */}
-          <Reveal delay={0.2}>
-            <div className="card p-6 sm:p-8 mt-8">
-              <p
-                className="eyebrow text-center"
-                style={{ color: "var(--violet)" }}
-              >
-                Your request, start to finish
-              </p>
+        </div>
+      </section>
 
-              <ol className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-2 sm:gap-3 mt-6">
-                {[
-                  { label: "Received", c: "#3A86FF" },
-                  { label: "Contacted", c: "#E8AE00" },
-                  { label: "In Progress", c: "#12B3A0" },
-                  { label: "Completed", c: "#767676" },
-                ].map((s, i, arr) => (
-                  <li
-                    key={s.label}
-                    className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3"
-                  >
-                    <span
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-2xl text-[13.5px] font-semibold"
-                      style={{
-                        background: `color-mix(in srgb, ${s.c} 12%, transparent)`,
-                      }}
-                    >
-                      <span
-                        className="w-2 h-2 rounded-full"
-                        style={{ background: s.c }}
-                      />
-                      {s.label}
-                    </span>
-                    {i < arr.length - 1 && (
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="var(--muted)"
-                        className="w-4 h-4 shrink-0 rotate-90 sm:rotate-0 opacity-50"
-                        aria-hidden
-                      >
-                        <path d="m10 17 5-5-5-5v10Z" />
-                      </svg>
-                    )}
-                  </li>
-                ))}
-              </ol>
-
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-9">
-                {[
-                  {
-                    icon: Bell,
-                    c: "#3A86FF",
-                    title: "Your phone buzzes",
-                    body: "A notification every time the status changes, with the full history behind the bell on Home.",
-                  },
-                  {
-                    icon: Handshake,
-                    c: "#12B3A0",
-                    title: "See the partner's progress",
-                    body: "When someone from our verified network takes the job, you see when they start and when they finish. We stay in the middle throughout.",
-                  },
-                  {
-                    icon: ThumbsUp,
-                    c: "#E8AE00",
-                    title: "One tap to say how it went",
-                    body: "Went well, it was okay, or not good. Only our team sees it, and it decides who gets your next job.",
-                  },
-                  {
-                    icon: LockKeyhole,
-                    c: "#6D3BF5",
-                    title: "Only you see your requests",
-                    body: "Browse as a guest, or sign in with Google or your phone. We verify your number with a one-time code before your first request.",
-                  },
-                ].map((p) => (
-                  <div key={p.title} className="group">
-                    <IconTile icon={p.icon} color={p.c} size={42} />
-                    <h3 className="display-md text-[16px] mt-3">{p.title}</h3>
-                    <p
-                      className="text-[13.5px] mt-1.5 leading-relaxed"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      {p.body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
+      {/* ==================== JOURNEY ==================== */}
+      <section id="journey" className="relative z-10 px-5 pt-8 sm:pt-16">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p
+              className="eyebrow text-center"
+              style={{ color: "var(--violet)" }}
+            >
+              Your request, start to finish
+            </p>
+            <h2
+              className="display text-center mt-4"
+              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
+            >
+              Scroll to <span className="marker">watch it happen.</span>
+            </h2>
           </Reveal>
+
+          <RequestJourney />
         </div>
       </section>
 
