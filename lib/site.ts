@@ -7,41 +7,46 @@ export const CONTACT = {
   city: "Tirupati, Andhra Pradesh",
 };
 
+/** Same labels, same order as homeCategories.ts in the Lasan Mart app */
 export const ONLINE_SERVICES = [
-  "Social Media Marketing",
-  "Lead Generation",
-  "Google My Business",
-  "SEO & Google Ads",
-  "Website & App Development",
-  "WhatsApp Automation",
-  "Landing Pages",
-  "Influencer Marketing",
-  "TV & Theatre Ads",
-  "Photo & Video Shoots",
-  "Analytics & Reporting",
-  "AI Search Optimisation",
-  "PR & Media Coverage",
   "Digital Marketing",
-  "Offline-Online Integration",
+  "Website & CRM",
+  "Social Media",
+  "Lead Generation",
+  "GMB Optimization",
+  "SEO & Ads",
+  "Landing Pages",
+  "WhatsApp Automation",
+  "Influencer Marketing",
+  "TV & Theater Ads",
+  "Flash Shoot",
+  "Analytics & Growth",
+  "AI Optimization",
+  "PR & Publicity",
+  "Offline-Online Sync",
 ];
 
 export const OFFLINE_SERVICES = [
-  "Hoardings & Billboards",
+  "Hoardings",
+  "Outdoor Ads",
   "LED Boards",
-  "Transit Advertising",
-  "Print & Newspaper",
-  "Events & Activations",
-  "Local Area Marketing",
-  "Direct Mail & SMS",
+  "Transit Ads",
+  "Print Media",
+  "Event Marketing",
+  "Local Engagement",
+  "Direct Marketing",
   "Vehicle Branding",
-  "Radio & FM",
-  "Field Sales Teams",
+  "Traditional Media",
+  "Field Sales",
   "Telecalling",
-  "Standees & Signage",
-  "Exhibitions & Stalls",
-  "Corporate & B2B Events",
-  "Outdoor Advertising",
+  "Display Boards",
+  "Exhibitions",
+  "Corporate Events",
 ];
+
+/** The choices on the app's request form */
+export const BUDGETS = ["Under ₹25K", "₹25K–50K", "₹50K–1L", "₹1L+", "Not sure"];
+export const TIMELINES = ["ASAP", "This month", "Next month", "Flexible"];
 
 /** Mirrors plans.ts in the Lasan Mart app, so keep the two in step */
 export const PLANS = [

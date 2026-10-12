@@ -5,7 +5,14 @@ import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
 import ServiceCarousel from "@/components/ServiceCarousel";
 import Faq from "@/components/Faq";
-import { PLANS, CONTACT } from "@/lib/site";
+import {
+  PLANS,
+  CONTACT,
+  ONLINE_SERVICES,
+  OFFLINE_SERVICES,
+  BUDGETS,
+  TIMELINES,
+} from "@/lib/site";
 
 export default function Home() {
   return (
@@ -299,6 +306,66 @@ export default function Home() {
 
           <Reveal delay={0.1}>
             <ServiceCarousel />
+          </Reveal>
+
+          {/* Every service on the app's Home screen, by name */}
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mt-16">
+            {[
+              {
+                title: "Online Marketing",
+                items: ONLINE_SERVICES,
+                c: "var(--violet)",
+              },
+              {
+                title: "Offline Marketing",
+                items: OFFLINE_SERVICES,
+                c: "var(--orange)",
+              },
+            ].map((group, i) => (
+              <Reveal key={group.title} delay={i * 0.1}>
+                <div className="card p-6 sm:p-7 h-full">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3
+                      className="display-md text-[19px]"
+                      style={{ color: group.c }}
+                    >
+                      {group.title}
+                    </h3>
+                    <span
+                      className="text-[12.5px] font-semibold"
+                      style={{ color: "var(--muted)" }}
+                    >
+                      {group.items.length} services
+                    </span>
+                  </div>
+                  <ul className="flex flex-wrap gap-2 mt-5">
+                    {group.items.map((s) => (
+                      <li
+                        key={s}
+                        className="text-[13px] font-medium px-3 py-1.5 rounded-xl"
+                        style={{
+                          background: `color-mix(in srgb, ${group.c} 8%, transparent)`,
+                        }}
+                      >
+                        {s}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={0.2}>
+            <p
+              className="text-center mt-8 text-[14px] max-w-xl mx-auto leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Tap any of them in the app, pick your business sector, describe
+              what you need, then choose a rough budget ({BUDGETS.join(", ")})
+              and a timeline ({TIMELINES.join(", ")}). Can&apos;t find it?
+              Post a custom requirement in your own words.
+            </p>
           </Reveal>
         </div>
       </section>
