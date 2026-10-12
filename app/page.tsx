@@ -5,6 +5,7 @@ import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
 import ServiceCarousel from "@/components/ServiceCarousel";
 import Faq from "@/components/Faq";
+import BusinessIdeas from "@/components/BusinessIdeas";
 import {
   PLANS,
   CONTACT,
@@ -366,6 +367,40 @@ export default function Home() {
               and a timeline ({TIMELINES.join(", ")}). Can&apos;t find it?
               Post a custom requirement in your own words.
             </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ==================== BUSINESS IDEAS ==================== */}
+      <section id="ideas" className="relative z-10 py-16 sm:py-24 px-5">
+        <div className="max-w-5xl mx-auto">
+          <Reveal>
+            <p
+              className="eyebrow text-center"
+              style={{ color: "var(--violet)" }}
+            >
+              Business Ideas
+            </p>
+            <h2
+              className="display text-center mt-4"
+              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
+            >
+              Not sure where to start?
+              <br />
+              <span className="marker">Pick your sector.</span>
+            </h2>
+            <p
+              className="text-center mt-5 text-[16px] max-w-lg mx-auto leading-relaxed"
+              style={{ color: "var(--muted)" }}
+            >
+              Twenty playbooks, free in the app: what tends to work in your
+              line of business, which services to start with, and how to
+              think about spend.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <BusinessIdeas />
           </Reveal>
         </div>
       </section>
