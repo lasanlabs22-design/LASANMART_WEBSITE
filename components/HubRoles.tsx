@@ -74,7 +74,7 @@ const ROLES = [
     label: "Freelancers",
     c: "#3A86FF",
     headline: "Get briefed, not ghosted",
-    body: "When our clients need a shoot, an edit or a campaign, we come to you. No bidding, no undercutting, no chasing invoices.",
+    body: "When our clients need a shoot, an edit, a campaign or an app, we come to you. No bidding, no undercutting, no chasing invoices.",
     steps: [
       ["Show us your work", "Skills, portfolio and what you charge"],
       ["We review it properly", "A real person looks at your portfolio"],
@@ -82,7 +82,7 @@ const ROLES = [
     ],
     lists: ["Your skills", "Portfolio link", "Instagram handle", "Rate card"],
     optionsTitle: "Skills you can offer",
-    options: ["Photography", "Videography", "Video Editing", "Digital Marketing"],
+    options: ["Photography", "Videography", "Video Editing", "Digital Marketing", "Software Development"],
     note: "A portfolio can be anything that shows your work: Behance, a Google Drive folder, your Instagram or your own site.",
   },
 ] as const;
