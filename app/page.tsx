@@ -1577,6 +1577,7 @@ export default function Home() {
                 { href: "#hub", label: "Lasan Mart Hub" },
                 { href: "#faq", label: "FAQ" },
                 { href: "/privacy", label: "Privacy Policy" },
+                { href: "/delete-account", label: "Delete Account" },
               ].map((l) => (
                 <a
                   key={l.href}
