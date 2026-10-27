@@ -5,12 +5,12 @@ import Image from "next/image";
 import StoreButton from "./StoreButton";
 
 const LINKS = [
+  { href: "#app", label: "The app" },
+  { href: "#how", label: "How it works" },
   { href: "#services", label: "Services" },
-  { href: "#ideas", label: "Business Ideas" },
-  { href: "#freelancers", label: "Freelancers" },
-  { href: "#vibes", label: "Lasan Vibes" },
   { href: "#plans", label: "Plans" },
   { href: "#hub", label: "Lasan Mart Hub" },
+  { href: "#faq", label: "FAQ" },
 ];
 
 export default function Nav() {

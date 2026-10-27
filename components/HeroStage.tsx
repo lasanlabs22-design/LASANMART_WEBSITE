@@ -1,73 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  BadgeCheck,
-  Camera,
-  ChartLine,
-  Heart,
-  Laptop,
-  Megaphone,
-  MessageCircle,
-  Newspaper,
-  Play,
-  Signpost,
-  Smartphone,
-  Star,
-  type LucideIcon,
-} from "lucide-react";
-import LoopVideo from "./LoopVideo";
-
-/* Services that circle the phone, in the app's tile colours */
-const ORBIT: [LucideIcon, string, string][] = [
-  [Signpost, "#E63946", "Hoardings"],
-  [Smartphone, "#C13584", "Social media"],
-  [Star, "#F2542D", "Influencers"],
-  [Camera, "#E8AE00", "Shoots"],
-  [Laptop, "#2D6CDF", "Websites"],
-  [MessageCircle, "#25D366", "WhatsApp"],
-  [Newspaper, "#495057", "Print"],
-  [ChartLine, "#7B2FF7", "SEO & Ads"],
-];
-
-/**
- * One copy of the ring. Drawn twice, clipped to its far and near
- * halves, so icons pass behind the phone at the back and in front of
- * it at the front. Both copies share the same animation clock.
- */
-function OrbitRing({ half }: { half: "back" | "front" }) {
-  return (
-    <div
-      aria-hidden
-      className="orbit-clip"
-      style={{
-        clipPath: half === "back" ? "inset(0 0 50% 0)" : "inset(50% 0 0 0)",
-      }}
-    >
-      <div className="orbit">
-        <div className="orbit-ring">
-          {ORBIT.map(([Icon, c, label], i) => (
-            <div
-              key={label}
-              className="orbit-item"
-              style={{ "--a": `${(360 / ORBIT.length) * i}deg` } as React.CSSProperties}
-            >
-              <div className="orbit-face">
-                <span
-                  className="orbit-bubble"
-                  style={{ color: c }}
-                  title={label}
-                >
-                  <Icon strokeWidth={2} className="w-[46%] h-[46%]" />
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
+import { BadgeCheck, Bell, PhoneCall, type LucideIcon } from "lucide-react";
+import Device from "./Device";
+import { HomeScreen, VibesScreen, SCREEN_LABELS } from "./AppScreens";
 
 type Float = {
   icon?: LucideIcon;
@@ -80,43 +16,34 @@ type Float = {
   delay: string;
 };
 
-/* A request's life, told by the cards around the phone */
+/* What happens after a tap, told by the cards around the phones */
 const FLOATS: Float[] = [
   {
-    icon: Megaphone,
+    icon: PhoneCall,
     c: "#FF6B35",
-    title: "New request",
-    sub: "Hoardings · Tirupati",
-    pos: "left-[0%] top-[8%] sm:left-[4%] sm:top-[12%] lg:left-[-3%] lg:top-[34%]",
+    title: "We'll call you back",
+    sub: "Within 4–6 working hours",
+    pos: "left-0 top-[40%] sm:left-[2%] lg:left-[-8%] lg:top-[42%]",
     depth: 26,
     delay: "0s",
-  },
-  {
-    icon: Star,
-    c: "#6D3BF5",
-    title: "Creator matched",
-    sub: "Food · City page",
-    pos: "hidden sm:block right-[3%] top-[6%] lg:right-[-2%] lg:top-[10%]",
-    depth: 18,
-    delay: "1.3s",
   },
   {
     live: true,
     c: "#12B3A0",
     title: "In Progress",
-    sub: "Our partner is on it",
-    pos: "right-[0%] top-[46%] sm:top-auto sm:right-[6%] sm:bottom-[22%] lg:right-[-3%] lg:bottom-[30%]",
+    sub: "Your hoarding is going up",
+    pos: "right-0 top-[54%] sm:right-[4%] lg:right-[-2%] lg:top-[58%]",
     depth: 32,
-    delay: "0.6s",
+    delay: "0.8s",
   },
   {
     icon: BadgeCheck,
     c: "#0EA97A",
     title: "Quote approved",
     sub: "Work starts on your yes",
-    pos: "hidden sm:block left-[7%] bottom-[10%] lg:left-[2%] lg:bottom-[1%]",
-    depth: 22,
-    delay: "2s",
+    pos: "hidden sm:block left-[4%] bottom-[6%] lg:left-[-2%] lg:bottom-[8%]",
+    depth: 20,
+    delay: "1.6s",
   },
 ];
 
@@ -166,74 +93,45 @@ export default function HeroStage() {
   return (
     <div
       ref={root}
-      className="relative w-full mx-auto mt-14 sm:mt-16 lg:mt-0 max-w-4xl h-[440px] sm:h-[540px] lg:h-[580px] rise"
-      style={{ animationDelay: "0.55s" }}
+      className="relative w-full mx-auto mt-12 sm:mt-14 lg:mt-0 max-w-[560px] h-[470px] sm:h-[560px] lg:h-[640px] rise"
+      style={{ animationDelay: "0.4s" }}
     >
-      {/* Soft halo behind the phone */}
+      {/* Soft halo behind the phones */}
       <div
         aria-hidden
-        className="absolute left-1/2 top-1/2 w-[360px] h-[360px] sm:w-[480px] sm:h-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full"
+        className="absolute left-1/2 top-1/2 w-[340px] h-[340px] sm:w-[480px] sm:h-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
           background:
-            "radial-gradient(circle, rgba(109,59,245,0.22), rgba(255,107,53,0.12) 45%, transparent 70%)",
+            "radial-gradient(circle, rgba(95,37,159,0.24), rgba(255,107,53,0.12) 45%, transparent 70%)",
           filter: "blur(10px)",
         }}
       />
 
-      <OrbitRing half="back" />
-
-      {/* The phone */}
-      <div className="absolute z-[1] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div data-depth="10">
-          <div className="phone w-[200px] sm:w-[248px] -rotate-[4deg]">
-            <div className="phone-screen">
-              <LoopVideo
-                src="/media/hero-reel.mp4"
-                poster="/media/hero-reel.jpg"
-                className="absolute inset-0 w-full h-full"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/70" />
-
-              <span className="absolute top-9 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10.5px] font-bold text-white glass-dark">
-                <Play size={10} fill="#fff" strokeWidth={0} />
-                LASAN VIBES
-              </span>
-
-              <div className="absolute right-2.5 bottom-20 flex flex-col items-center gap-1 text-white">
-                <span className="w-9 h-9 rounded-full glass-dark flex items-center justify-center">
-                  <Heart size={16} fill="#FF6B35" strokeWidth={0} />
-                </span>
-                <span className="text-[10px] font-semibold">Like</span>
-              </div>
-
-              <div className="absolute left-3 right-12 bottom-4 text-white">
-                <div className="flex items-center gap-2">
-                  <span
-                    className="w-7 h-7 rounded-full flex items-center justify-center text-[11px] font-bold"
-                    style={{
-                      background: "linear-gradient(135deg,#FF8A3D,#6D3BF5)",
-                    }}
-                  >
-                    N
-                  </span>
-                  <span className="text-[12px] font-semibold">
-                    noodle_house
-                  </span>
-                </div>
-                <p className="text-[11.5px] mt-1.5 leading-snug text-white/85">
-                  Our new ramen bowls, shot this morning
-                </p>
-              </div>
-            </div>
-          </div>
+      {/* Lasan Vibes, behind and to the right */}
+      <div className="absolute left-1/2 top-1/2 translate-x-[-4%] -translate-y-[46%]">
+        <div data-depth="6">
+          <Device
+            label={SCREEN_LABELS.vibes}
+            className="[--s:0.46] sm:[--s:0.56] lg:[--s:0.62] rotate-[7deg] opacity-95"
+          >
+            <VibesScreen />
+          </Device>
         </div>
       </div>
 
-      <div className="absolute inset-0 z-[2] pointer-events-none">
-        <OrbitRing half="front" />
+      {/* Home, in front */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-[86%] sm:-translate-x-[80%] -translate-y-1/2">
+        <div data-depth="12">
+          <Device
+            label={SCREEN_LABELS.home}
+            className="[--s:0.56] sm:[--s:0.66] lg:[--s:0.76] -rotate-[3deg]"
+          >
+            <HomeScreen />
+          </Device>
+        </div>
       </div>
 
-      {/* Cards around it */}
+      {/* Cards around them */}
       {FLOATS.map((f) => {
         const Icon = f.icon;
         return (
@@ -241,6 +139,7 @@ export default function HeroStage() {
             key={f.title}
             data-depth={f.depth}
             className={`absolute z-10 ${f.pos}`}
+            aria-hidden
           >
             <div
               className="floaty glass rounded-2xl pl-2.5 pr-4 py-2.5 flex items-center gap-3"
@@ -276,6 +175,28 @@ export default function HeroStage() {
           </div>
         );
       })}
+
+      {/* A notification sliding in at the top */}
+      <div
+        data-depth="36"
+        aria-hidden
+        className="absolute z-10 right-0 top-[2%] sm:right-[2%] lg:right-[-6%] lg:top-[6%]"
+      >
+        <div
+          className="floaty glass rounded-2xl px-3 py-2.5 flex items-center gap-2.5 max-w-[250px]"
+          style={{ animationDelay: "0.4s", "--tilt": "0deg" } as React.CSSProperties}
+        >
+          <span className="w-8 h-8 rounded-lg flex items-center justify-center text-white shrink-0" style={{ background: "#5F259F" }}>
+            <Bell size={15} />
+          </span>
+          <span className="leading-tight">
+            <span className="block text-[12px] font-bold">Lasan Mart · now</span>
+            <span className="block text-[11.5px] text-[color:var(--muted)] mt-0.5">
+              Your request is now Contacted
+            </span>
+          </span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -160,18 +160,6 @@ body {
   animation: floaty 6s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-.marquee {
-  animation: marquee 32s linear infinite;
-}
-
 /* ---------- Bits ---------- */
 
 .card {
@@ -350,13 +338,6 @@ body {
   }
 }
 
-/* The ticker slows to a stop while you read it */
-@media (hover: hover) {
-  .marquee-wrap:hover .marquee {
-    animation-play-state: paused;
-  }
-}
-
 /* Carousel autoplay: the active dot fills, then advances */
 @keyframes dotFill {
   from {
@@ -393,69 +374,7 @@ body {
 [data-reveal] .ticks li:nth-child(5) { transition-delay: calc(var(--reveal-delay, 0s) + 0.62s); }
 [data-reveal] .ticks li:nth-child(6) { transition-delay: calc(var(--reveal-delay, 0s) + 0.7s); }
 
-/* "How a job travels" — each step lights up in turn, on a loop */
-@keyframes flowStep {
-  0%,
-  22%,
-  100% {
-    background: rgba(255, 255, 255, 0.07);
-    color: rgba(255, 255, 255, 0.85);
-    box-shadow: 0 0 0 0 rgba(255, 197, 41, 0);
-  }
-  6%,
-  16% {
-    background: rgba(255, 197, 41, 0.16);
-    color: #fff;
-    box-shadow: 0 0 0 1px rgba(255, 197, 41, 0.45);
-  }
-}
-@keyframes flowArrow {
-  0%,
-  22%,
-  100% {
-    opacity: 0.35;
-    transform: translateX(0);
-  }
-  10% {
-    opacity: 1;
-    transform: translateX(3px);
-  }
-}
-.flow-step {
-  background: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.85);
-}
-[data-shown] .flow-step {
-  animation: flowStep 8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 2s);
-}
-[data-shown] .flow-arrow {
-  animation: flowArrow 8s ease-in-out infinite;
-  animation-delay: calc(var(--i) * 2s + 1s);
-}
-.flow-arrow {
-  opacity: 0.35;
-}
-
 /* ---------- Premium bits ---------- */
-
-/* Tinted tile behind a line icon */
-.icon-tile {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border-radius: 16px;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 8px 18px color-mix(in srgb, var(--tile) 16%, transparent);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-@media (hover: hover) {
-  .group:hover .icon-tile {
-    transform: translateY(-2px) rotate(-5deg) scale(1.07);
-  }
-}
 
 /* A soft light that follows the cursor across a card (PointerFX) */
 [data-spot] {
@@ -624,79 +543,42 @@ body {
   pointer-events: none;
 }
 
-/* Service icons circling the hero phone on a tilted ring. Each icon
-   undoes the ring's tilt and spin so it always faces the viewer. */
-.orbit-clip {
-  position: absolute;
-  inset: 0;
-  perspective: 1100px;
-  pointer-events: none;
-  --d: 330px;
-  --b: 34px;
-  --orbit-tilt: 72deg;
+/* A phone around a drawn app screen (Device). The screen is laid out at
+   360×760 and scaled by --s; set --s from Tailwind (e.g. [--s:0.7]).
+   It is read with a fallback rather than set here, because unlayered
+   CSS would beat the utility classes that set it. */
+.device {
+  position: relative;
+  flex-shrink: 0;
+  width: calc(var(--s, 0.6) * 360px + 14px);
+  padding: 7px;
+  border-radius: calc(var(--s, 0.6) * 52px + 7px);
+  background: linear-gradient(160deg, #2a2450, #0d0a20);
+  box-shadow:
+    0 40px 80px rgba(20, 16, 46, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
 }
-@media (min-width: 640px) {
-  .orbit-clip {
-    --d: 500px;
-    --b: 44px;
-  }
-}
-.orbit {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: var(--d);
-  height: var(--d);
-  margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2);
-  transform: rotateX(var(--orbit-tilt));
-  transform-style: preserve-3d;
-}
-.orbit-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(109, 59, 245, 0.28);
-  transform-style: preserve-3d;
-  animation: orbitSpin 36s linear infinite;
-}
-.orbit-item {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: rotate(var(--a)) translateX(calc(var(--d) / 2))
-    rotate(calc(-1 * var(--a)));
-  transform-style: preserve-3d;
-}
-.orbit-face {
-  /* Resting pose; the animation takes over while it runs */
-  transform: translate(-50%, -50%) rotateX(calc(-1 * var(--orbit-tilt)));
-  animation: orbitCounter 36s linear infinite;
-  transform-style: preserve-3d;
-}
-.orbit-bubble {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--b);
-  height: var(--b);
-  border-radius: 999px;
+.device-screen {
+  position: relative;
+  overflow: hidden;
+  width: calc(var(--s, 0.6) * 360px);
+  height: calc(var(--s, 0.6) * 760px);
+  border-radius: calc(var(--s, 0.6) * 52px);
   background: #fff;
-  border: 1px solid rgba(20, 16, 46, 0.06);
-  box-shadow: 0 10px 24px rgba(20, 16, 46, 0.14);
 }
-@keyframes orbitSpin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-@keyframes orbitCounter {
-  from {
-    transform: translate(-50%, -50%) rotate(0deg) rotateX(calc(-1 * var(--orbit-tilt)));
-  }
-  to {
-    transform: translate(-50%, -50%) rotate(-360deg)
-      rotateX(calc(-1 * var(--orbit-tilt)));
-  }
+.device-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 360px;
+  height: 760px;
+  overflow: hidden;
+  transform: scale(var(--s, 0.6));
+  transform-origin: 0 0;
+  color: #1a1a1a;
+  text-align: left;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* The "Powered by Lasan Labs" signature keeps Lasan's own look, as in
@@ -739,10 +621,6 @@ body {
   .dot-fill {
     animation: none !important;
     transform: none;
-  }
-  [data-shown] .flow-step,
-  [data-shown] .flow-arrow {
-    animation: none !important;
   }
   .live-dot::after,
   .glow-ring::before {

@@ -2,51 +2,68 @@ import Image from "next/image";
 import {
   ArrowRight,
   BadgeCheck,
-  BellRing,
-  Camera,
-  Clapperboard,
+  CalendarClock,
+  Check,
   Clock,
-  Eye,
-  FileText,
   Handshake,
-  Heart,
-  LayoutDashboard,
-  LifeBuoy,
-  ListChecks,
-  Laptop,
   Mail,
   MapPin,
   MessageCircle,
-  MessageSquareText,
   PhoneCall,
-  Scissors,
-  Star,
-  Store,
-  TrendingUp,
-  UserRoundCheck,
-  Gauge,
-  Wallet,
-  CalendarCheck,
-  Check,
+  SlidersHorizontal,
   Undo2,
+  Wallet,
 } from "lucide-react";
 import Nav from "@/components/Nav";
 import Aurora from "@/components/Aurora";
 import PointerFX from "@/components/PointerFX";
 import HeroStage from "@/components/HeroStage";
-import IconTile from "@/components/IconTile";
-import LoopVideo from "@/components/LoopVideo";
+import AppTour from "@/components/AppTour";
+import Device from "@/components/Device";
+import { HubScreen, SCREEN_LABELS } from "@/components/AppScreens";
 import ServiceLists from "@/components/ServiceLists";
 import PoweredBy from "@/components/PoweredBy";
 import RequestJourney from "@/components/RequestJourney";
 import Reveal from "@/components/Reveal";
-import Ticker from "@/components/Ticker";
 import StoreButton from "@/components/StoreButton";
 import ServiceCarousel from "@/components/ServiceCarousel";
 import Faq from "@/components/Faq";
-import BusinessIdeas from "@/components/BusinessIdeas";
-import HubRoles from "@/components/HubRoles";
-import { PLANS, CONTACT, BUDGETS, TIMELINES } from "@/lib/site";
+import { PLANS, CONTACT } from "@/lib/site";
+
+/** Eyebrow, heading and an optional line under it, centred */
+function SectionIntro({
+  eyebrow,
+  c = "var(--violet)",
+  children,
+  sub,
+}: {
+  eyebrow: string;
+  c?: string;
+  children: React.ReactNode;
+  sub?: React.ReactNode;
+}) {
+  return (
+    <Reveal>
+      <p className="eyebrow text-center" style={{ color: c }}>
+        {eyebrow}
+      </p>
+      <h2
+        className="display text-center mt-4"
+        style={{ fontSize: "clamp(30px, 5vw, 50px)" }}
+      >
+        {children}
+      </h2>
+      {sub && (
+        <p
+          className="text-center mt-5 text-[16px] sm:text-[17px] max-w-xl mx-auto leading-relaxed"
+          style={{ color: "var(--muted)" }}
+        >
+          {sub}
+        </p>
+      )}
+    </Reveal>
+  );
+}
 
 export default function Home() {
   return (
@@ -58,263 +75,142 @@ export default function Home() {
       {/* ==================== HERO ==================== */}
       <section
         data-spot
-        className="relative pt-28 sm:pt-36 lg:pt-28 pb-16 sm:pb-24 lg:pb-16 px-5 overflow-hidden z-10"
-        style={{ "--spot": "rgba(109,59,245,0.07)" } as React.CSSProperties}
+        className="relative pt-28 sm:pt-36 lg:pt-24 pb-12 sm:pb-20 lg:pb-10 px-5 overflow-hidden z-10"
+        style={{ "--spot": "rgba(95,37,159,0.07)" } as React.CSSProperties}
       >
         <div className="absolute inset-0 grid-bg" />
 
-        {/* Words on the left, the moving stage on the right from laptops up */}
-        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_1fr] lg:gap-6 items-center">
+        <div className="relative max-w-6xl mx-auto grid lg:grid-cols-[1.05fr_1fr] lg:gap-4 items-center">
           <div className="relative z-[2] text-center lg:text-left">
-          <div
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 rise"
-            style={{
-              background: "rgba(109,59,245,0.09)",
-              border: "1px solid rgba(109,59,245,0.18)",
-            }}
-          >
-            <span
-              className="w-2 h-2 rounded-full"
-              style={{ background: "var(--violet)" }}
-            />
-            <span
-              className="text-[12.5px] font-semibold"
-              style={{ color: "var(--violet-deep)" }}
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-8 rise"
+              style={{
+                background: "rgba(109,59,245,0.09)",
+                border: "1px solid rgba(109,59,245,0.18)",
+              }}
             >
-              Now serving businesses across Andhra Pradesh
-            </span>
-          </div>
-
-          <h1 className="display text-[clamp(40px,8vw,82px)] lg:text-[clamp(56px,5.4vw,78px)]">
-            <span className="mask-line">
-              <span style={{ animationDelay: "0.1s" }}>Marketing that</span>
-            </span>
-            <span className="mask-line">
-              <span style={{ animationDelay: "0.22s" }}>
-                actually <span className="gradient-text">gets done.</span>
+              <MapPin size={14} style={{ color: "var(--violet)" }} aria-hidden />
+              <span
+                className="text-[12.5px] font-semibold"
+                style={{ color: "var(--violet-deep)" }}
+              >
+                Made in Tirupati, for businesses across Andhra Pradesh
               </span>
-            </span>
-          </h1>
+            </div>
 
-          <p
-            className="max-w-xl mx-auto lg:mx-0 mt-7 text-[17px] leading-relaxed rise"
-            style={{ color: "var(--muted)", animationDelay: "0.36s" }}
-          >
-            Hoardings, Instagram, influencers, websites, print — tell us what
-            your business needs and our team handles the rest. No agencies to
-            chase, no quotes to compare.
-          </p>
+            <h1 className="display text-[clamp(40px,8vw,80px)] lg:text-[clamp(54px,5.2vw,76px)]">
+              <span className="mask-line">
+                <span style={{ animationDelay: "0.1s" }}>Your whole</span>
+              </span>
+              <span className="mask-line">
+                <span style={{ animationDelay: "0.18s" }}>marketing team,</span>
+              </span>
+              <span className="mask-line">
+                <span style={{ animationDelay: "0.26s" }}>
+                  <span className="gradient-text">in one app.</span>
+                </span>
+              </span>
+            </h1>
 
-          <div
-            className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-10 rise"
-            style={{ animationDelay: "0.44s" }}
-          >
-            <StoreButton />
-            <a
-              href="#services"
-              className="nudge inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 transition hover:-translate-y-0.5 hover:bg-[var(--ink)] hover:text-white"
-              style={{ borderColor: "var(--ink)" }}
+            <p
+              className="max-w-xl mx-auto lg:mx-0 mt-7 text-[17px] sm:text-[18px] leading-relaxed rise"
+              style={{ color: "var(--muted)", animationDelay: "0.36s" }}
             >
-              See what we do
-              <ArrowRight size={17} strokeWidth={2.2} />
-            </a>
-          </div>
+              Lasan Mart puts 30 marketing services on your phone, from
+              Instagram reels and Google ads to hoardings and events. Pick one,
+              tell us what you need, and our team calls you back with a plan
+              and a price.
+            </p>
 
-          <p
-            className="mt-5 text-[13px] rise"
-            style={{ color: "var(--muted)", animationDelay: "0.5s" }}
-          >
-            iOS version arriving soon
-          </p>
+            <div
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 mt-9 rise"
+              style={{ animationDelay: "0.44s" }}
+            >
+              <StoreButton />
+              <a
+                href="#app"
+                className="nudge inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl font-semibold text-[15px] border-2 transition hover:-translate-y-0.5 hover:bg-[var(--ink)] hover:text-white"
+                style={{ borderColor: "var(--ink)" }}
+              >
+                Take the tour
+                <ArrowRight size={17} strokeWidth={2.2} />
+              </a>
+            </div>
+
+            <ul
+              className="flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 mt-8 text-[13.5px] font-medium rise"
+              style={{ animationDelay: "0.5s" }}
+            >
+              {[
+                "Free to download",
+                "Callback in 4–6 working hours",
+                "Pay only for work you approve",
+              ].map((t) => (
+                <li key={t} className="inline-flex items-center gap-1.5">
+                  <span
+                    aria-hidden
+                    className="w-[18px] h-[18px] rounded-full flex items-center justify-center"
+                    style={{ background: "rgba(14,169,122,0.14)", color: "#0B8457" }}
+                  >
+                    <Check size={11} strokeWidth={3.2} />
+                  </span>
+                  {t}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <HeroStage />
         </div>
       </section>
 
-      {/* ==================== MARQUEE ==================== */}
-      <section
-        className="marquee-wrap relative z-10 py-4 sm:py-5 overflow-hidden border-y"
-        style={{ background: "var(--ink)", borderColor: "var(--ink-soft)" }}
-        aria-label="Services we offer"
-      >
-        <div className="flex marquee whitespace-nowrap">
-          {[0, 1].map((copy) => (
-            <div
-              key={copy}
-              className="flex items-center shrink-0"
-              aria-hidden={copy === 1 || undefined}
-            >
-              {[
-                "HOARDINGS",
-                "SOCIAL MEDIA",
-                "INFLUENCERS",
-                "WEBSITES",
-                "PRINT MEDIA",
-                "GOOGLE ADS",
-                "EVENTS",
-                "LED BOARDS",
-                "WHATSAPP",
-                "VIDEO SHOOTS",
-              ].map((word) => (
-                <span key={word} className="flex items-center">
-                  <span
-                    className="display-md text-[18px] sm:text-[22px] px-5 sm:px-7"
-                    style={{ color: "rgba(255,255,255,0.9)" }}
-                  >
-                    {word}
-                  </span>
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ background: "var(--yellow)" }}
-                  />
-                </span>
-              ))}
-            </div>
-          ))}
+      {/* ==================== INSIDE THE APP ==================== */}
+      <section id="app" className="relative z-10 py-16 sm:py-24 px-5 scroll-mt-16">
+        <div className="max-w-6xl mx-auto">
+          <SectionIntro
+            eyebrow="Inside the app"
+            sub="Here's what you'll find when you open Lasan Mart."
+          >
+            One app.
+            <br />
+            Every way to <span className="marker">get noticed.</span>
+          </SectionIntro>
+
+          <AppTour />
         </div>
       </section>
 
-      {/* ==================== STATS ==================== */}
-      <section className="relative z-10 py-16 px-5">
-        <div className="max-w-4xl mx-auto grid grid-cols-3 gap-4 text-center">
-          {[
-            { n: 30, s: "", label: "Services" },
-            { n: 20, s: "", label: "Business sectors" },
-            { n: 6, s: "hr", label: "Typical response" },
-          ].map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.1}>
-              <div className="display text-[clamp(34px,6vw,56px)] gradient-text">
-                <Ticker to={stat.n} suffix={stat.s} />
-              </div>
-              <p className="text-[13px] mt-1" style={{ color: "var(--muted)" }}>
-                {stat.label}
-              </p>
-            </Reveal>
-          ))}
-        </div>
-      </section>
-
-      {/* ==================== HOW IT WORKS ==================== */}
-      <section className="relative z-10 py-16 sm:py-24 px-5">
+      {/* ==================== HOW A REQUEST WORKS ==================== */}
+      <section id="how" className="relative z-10 px-5 pt-8 sm:pt-16 scroll-mt-16">
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--violet)" }}
-            >
-              How it works
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Three steps. That&apos;s it.
-            </h2>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
-            {[
-              {
-                n: "01",
-                title: "Tell us what you need",
-                body: "Pick a service or describe your goal in your own words. Not sure? Browse Business Ideas for your sector.",
-                c: "#FF6B35",
-                icon: MessageSquareText,
-              },
-              {
-                n: "02",
-                title: "We come back with a plan",
-                body: "Our team reviews every request and calls you within 4–6 working hours with options and costs.",
-                c: "#6D3BF5",
-                icon: PhoneCall,
-              },
-              {
-                n: "03",
-                title: "Watch it happen",
-                body: "Track every request in the app. Your phone buzzes the moment the status changes.",
-                c: "#E8AE00",
-                icon: BellRing,
-              },
-            ].map((step, i) => (
-              <Reveal key={step.n} delay={i * 0.1}>
-                <div
-                  data-spot
-                  className="group card card-lift tilt trace p-7 h-full"
-                >
-                  <div className="flex items-start justify-between">
-                    <div
-                      className="display text-[40px] leading-none"
-                      style={{ color: step.c }}
-                    >
-                      {step.n}
-                    </div>
-                    <IconTile icon={step.icon} color={step.c} size={48} />
-                  </div>
-                  <h3 className="display-md text-[19px] mt-5">{step.title}</h3>
-                  <p
-                    className="mt-3 text-[14.5px] leading-relaxed"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {step.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* ==================== JOURNEY ==================== */}
-      <section id="journey" className="relative z-10 px-5 pt-8 sm:pt-16">
-        <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--violet)" }}
-            >
-              Your request, start to finish
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Scroll to <span className="marker">watch it happen.</span>
-            </h2>
-          </Reveal>
+          <SectionIntro
+            eyebrow="How a request works"
+            c="var(--orange)"
+            sub="Follow one hoarding request from the form to the finished job."
+          >
+            You tap once.
+            <br />
+            <span className="marker">We do the rest.</span>
+          </SectionIntro>
 
           <RequestJourney />
         </div>
       </section>
 
       {/* ==================== SERVICES ==================== */}
-      <section id="services" className="relative z-10 py-16 sm:py-24 px-5">
+      <section id="services" className="relative z-10 py-16 sm:py-24 px-5 scroll-mt-16">
         <div className="relative max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--orange)" }}
-            >
-              What we do
-            </p>
-            <h2
-              className="display text-center mt-4 mb-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Thirty services.
-              <br />
-              One place.
-            </h2>
-            <p
-              className="text-center text-[15px] mb-14"
-              style={{ color: "var(--muted)" }}
-            >
-              Swipe through, or tap the arrows
-            </p>
-          </Reveal>
+          <SectionIntro
+            eyebrow="30 services"
+            c="var(--orange)"
+            sub="If it helps people find your business, it's in the app."
+          >
+            Online, offline,
+            <br />
+            and everything between.
+          </SectionIntro>
 
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="mt-12 sm:mt-14">
             <ServiceCarousel />
           </Reveal>
 
@@ -323,333 +219,28 @@ export default function Home() {
 
           <Reveal delay={0.2}>
             <p
-              className="text-center mt-8 text-[14px] max-w-xl mx-auto leading-relaxed"
+              className="text-center mt-8 text-[14.5px] max-w-xl mx-auto leading-relaxed"
               style={{ color: "var(--muted)" }}
             >
-              Tap any of them in the app, pick your business sector, describe
-              what you need, then choose a rough budget ({BUDGETS.join(", ")})
-              and a timeline ({TIMELINES.join(", ")}). Can&apos;t find it?
-              Post a custom requirement in your own words.
+              Don&apos;t see it? Tap{" "}
+              <strong style={{ color: "var(--ink)" }}>Something else in mind?</strong>{" "}
+              on the Home screen and describe it in your own words.
             </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== BUSINESS IDEAS ==================== */}
-      <section id="ideas" className="relative z-10 py-16 sm:py-24 px-5">
-        <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--violet)" }}
-            >
-              Business Ideas
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Not sure where to start?
-              <br />
-              <span className="marker">Pick your sector.</span>
-            </h2>
-            <p
-              className="text-center mt-5 text-[16px] max-w-lg mx-auto leading-relaxed"
-              style={{ color: "var(--muted)" }}
-            >
-              Twenty playbooks, free in the app: what tends to work in your
-              line of business, which services to start with, and how to
-              think about spend.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <BusinessIdeas />
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== FREELANCERS ==================== */}
-      <section id="freelancers" className="relative py-20 sm:py-28 px-5 overflow-hidden">
-        <div
-          className="blob drift"
-          style={{
-            width: 440,
-            height: 440,
-            top: "10%",
-            right: "-12%",
-            background: "var(--violet)",
-            opacity: 0.14,
-          }}
-        />
-
-        <div className="relative max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--violet)" }}
-            >
-              New
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Need a shoot?
-              <br />
-              An editor? <span className="marker">Just ask.</span>
-            </h2>
-            <p
-              className="text-center mt-5 text-[16px] max-w-lg mx-auto leading-relaxed"
-              style={{ color: "var(--muted)" }}
-            >
-              Pick what you need — more than one is fine — and our team finds
-              the right person and comes back with a quote.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mt-12 sm:mt-16">
-            {[
-              {
-                icon: Camera,
-                label: "Photography",
-                body: "Products, interiors, food, events",
-                c: "#3A86FF",
-                clip: "photo",
-              },
-              {
-                icon: Clapperboard,
-                label: "Videography",
-                body: "Shoots, coverage, reels, ads",
-                c: "#C13584",
-                clip: "video",
-              },
-              {
-                icon: Scissors,
-                label: "Video Editing",
-                body: "Cutting, colour, subtitles, reels",
-                c: "#6D3BF5",
-                clip: "edit",
-              },
-              {
-                icon: TrendingUp,
-                label: "Digital Marketing",
-                body: "Social media, ads, content, SEO",
-                c: "#0EA97A",
-                clip: "marketing",
-              },
-            ].map((f, i) => (
-              <Reveal key={f.label} delay={i * 0.08}>
-                <div
-                  data-tilt="8"
-                  className="card card-lift h-full group cursor-default overflow-hidden"
-                  style={{ borderColor: "var(--line)" }}
-                >
-                  <div className="relative aspect-[16/11] overflow-hidden">
-                    <LoopVideo
-                      src={`/media/fl-${f.clip}.mp4`}
-                      poster={`/media/fl-${f.clip}.jpg`}
-                      className="absolute inset-0 w-full h-full transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent" />
-                    <span className="absolute left-3 bottom-3">
-                      <IconTile icon={f.icon} color={f.c} size={38} solid />
-                    </span>
-                  </div>
-
-                  <div className="p-4 sm:p-5">
-                    <h3
-                      className="display-md text-[15.5px] sm:text-[17px] leading-tight"
-                      style={{ color: f.c }}
-                    >
-                      {f.label}
-                    </h3>
-                    <p
-                      className="mt-2 text-[13px] sm:text-[13.5px] leading-relaxed"
-                      style={{ color: "var(--muted)" }}
-                    >
-                      {f.body}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== LASAN VIBES ==================== */}
-      <section
-        id="vibes"
-        className="relative z-10 py-20 sm:py-28 px-5 overflow-hidden"
-        style={{ background: "var(--ink)" }}
-      >
-        <div
-          className="blob drift"
-          style={{
-            width: 420,
-            height: 420,
-            top: "-10%",
-            right: "-10%",
-            background: "var(--violet)",
-            opacity: 0.4,
-          }}
-        />
-
-        <div className="relative max-w-5xl mx-auto grid md:grid-cols-2 gap-14 items-center">
-          <Reveal>
-            <p className="eyebrow" style={{ color: "var(--yellow)" }}>
-              Lasan Vibes
-            </p>
-            <h2
-              className="display text-white mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 46px)" }}
-            >
-              Your campaigns,
-              <br />
-              in motion.
-            </h2>
-            <p className="text-white/60 text-[16px] leading-relaxed mt-5 max-w-md">
-              A short-video feed inside the app where local businesses share
-              shoots, launches and campaigns as they happen. Watch as much as
-              you like, and like what you enjoy.
-            </p>
-            <p className="text-white/60 text-[16px] leading-relaxed mt-4 max-w-md">
-              Want to post? Vibes is seen by everyone using Lasan Mart, so our
-              team checks who posts. Tell us what you&apos;d share, and once
-              you&apos;re approved your videos go live the moment you post
-              them. Edit captions or delete your videos any time from My Vibes.
-            </p>
-
-            <div className="flex flex-wrap gap-3 mt-8">
-              {[
-                "Free to watch",
-                "Seen by every user",
-                "Up to 90 seconds",
-                "Likes and views",
-              ].map(
-                (t) => (
-                  <span
-                    key={t}
-                    className="text-[13px] font-semibold px-4 py-2 rounded-full"
-                    style={{
-                      background: "rgba(255,197,41,0.14)",
-                      color: "var(--yellow)",
-                    }}
-                  >
-                    {t}
-                  </span>
-                ),
-              )}
-            </div>
-          </Reveal>
-
-          {/* Three reels as they look in the app's feed */}
-          <Reveal delay={0.12}>
-            <div className="flex gap-3 sm:gap-4 justify-center items-center">
-              {[
-                {
-                  clip: "creator",
-                  who: "techtalk.tpt",
-                  line: "Unboxing the new lineup",
-                  c: "#6D3BF5",
-                  d: "0s",
-                  w: "w-[29%] max-w-[160px] mt-10",
-                  side: true,
-                },
-                {
-                  clip: "fashion",
-                  who: "the.lookbook",
-                  line: "Festive lookbook, behind the scenes",
-                  c: "#FF6B35",
-                  d: "1s",
-                  w: "w-[36%] max-w-[210px] z-10",
-                },
-                {
-                  clip: "chef",
-                  who: "grillhouse",
-                  line: "Live counter, all weekend",
-                  c: "#E8AE00",
-                  d: "2s",
-                  w: "w-[29%] max-w-[160px] mt-10",
-                  side: true,
-                },
-              ].map((r) => (
-                <div
-                  key={r.clip}
-                  className={`floaty relative ${r.w}`}
-                  style={
-                    {
-                      animationDelay: r.d,
-                      "--tilt": "0deg",
-                    } as React.CSSProperties
-                  }
-                >
-                  <div
-                    data-tilt="10"
-                    className="phone p-[5px]! rounded-[26px]!"
-                  >
-                    <div className="phone-screen rounded-[21px]!">
-                      <LoopVideo
-                        src={`/media/vibes-${r.clip}.mp4`}
-                        poster={`/media/vibes-${r.clip}.jpg`}
-                        className="absolute inset-0 w-full h-full"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75" />
-
-                      <div className="absolute right-2 bottom-16 flex flex-col items-center gap-2.5 text-white">
-                        <Heart size={17} fill="#fff" strokeWidth={0} />
-                        <Eye size={17} strokeWidth={2} />
-                      </div>
-
-                      <div
-                        className={`absolute left-2.5 right-8 bottom-3 text-white ${"side" in r ? "hidden sm:block" : ""}`}
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <span
-                            className="w-5 h-5 rounded-full shrink-0"
-                            style={{ background: r.c }}
-                          />
-                          <span className="text-[10.5px] font-semibold truncate">
-                            {r.who}
-                          </span>
-                        </div>
-                        <p className="text-[10px] mt-1 leading-snug text-white/80 line-clamp-2">
-                          {r.line}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
           </Reveal>
         </div>
       </section>
 
       {/* ==================== PLANS ==================== */}
-      <section id="plans" className="relative z-10 py-20 sm:py-28 px-5">
+      <section id="plans" className="relative z-10 py-16 sm:py-24 px-5 scroll-mt-16">
         <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--violet)" }}
-            >
-              Digital plans
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Or start with a plan.
-            </h2>
-            <p
-              className="text-center mt-4 text-[16px] max-w-lg mx-auto"
-              style={{ color: "var(--muted)" }}
-            >
-              Everything bundled, priced upfront, no surprises.
-            </p>
-          </Reveal>
+          <SectionIntro
+            eyebrow="Monthly plans"
+            sub="Reels, posters, ads and a manager, bundled at one monthly price."
+          >
+            Want it handled
+            <br />
+            every month?
+          </SectionIntro>
 
           <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
             {PLANS.map((plan, i) => {
@@ -786,159 +377,52 @@ export default function Home() {
 
           {/* What the app tells someone at the foot of the plan enquiry */}
           <Reveal delay={0.2}>
-            <div className="card p-6 sm:p-8 mt-10">
-              <p
-                className="eyebrow text-center"
-                style={{ color: "var(--violet)" }}
-              >
-                What happens when you enquire
-              </p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-7">
-                {[
-                  {
-                    title: "An enquiry, not an order",
-                    body: "Nothing is booked and nothing is charged. You are asking us to get in touch.",
-                  },
-                  {
-                    title: "We call you back",
-                    body: "Usually within one working day, to go through what you need and what the plan covers.",
-                  },
-                  {
-                    title: "The plan can be adjusted",
-                    body: "If something in it does not suit your business, we change it before anything is agreed.",
-                  },
-                  {
-                    title: "You approve the cost first",
-                    body: "Work begins only once you have seen the final quote and said yes.",
-                  },
-                ].map((p, i) => (
-                  <div key={p.title}>
-                    <div
-                      className="display text-[22px] leading-none"
-                      style={{ color: "var(--orange)" }}
-                    >
-                      0{i + 1}
-                    </div>
-                    <h3 className="display-md text-[16px] mt-3">{p.title}</h3>
-                    <p
-                      className="text-[13.5px] mt-1.5 leading-relaxed"
+            <ul className="grid sm:grid-cols-3 gap-5 sm:gap-6 mt-10">
+              {[
+                {
+                  icon: Wallet,
+                  title: "Enquiring is free",
+                  body: "Nothing is booked or charged until you've seen the quote and said yes.",
+                },
+                {
+                  icon: CalendarClock,
+                  title: "We call within a working day",
+                  body: "To go through what you need and what the plan covers.",
+                },
+                {
+                  icon: SlidersHorizontal,
+                  title: "Shaped to your business",
+                  body: "Anything that doesn't suit you gets changed before you agree.",
+                },
+              ].map((p) => (
+                <li key={p.title} className="flex gap-3.5">
+                  <span
+                    aria-hidden
+                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "rgba(255,107,53,0.1)", color: "var(--orange)" }}
+                  >
+                    <p.icon size={19} />
+                  </span>
+                  <span>
+                    <span className="block font-semibold text-[15px]">{p.title}</span>
+                    <span
+                      className="block text-[14px] leading-relaxed mt-1"
                       style={{ color: "var(--muted)" }}
                     >
                       {p.body}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.3}>
-            <p
-              className="text-center mt-10 text-[14px]"
-              style={{ color: "var(--muted)" }}
-            >
-              Not sure which plan fits? Ask us and we will tell you honestly.
-              Need something else entirely? Post a custom requirement in the
-              app and we&apos;ll scope it for you.
-            </p>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ==================== TOOLS ==================== */}
-      <section
-        className="relative z-10 py-20 sm:py-28 px-5"
-        style={{ background: "#fff" }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--orange)" }}
-            >
-              Free tools
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              More than marketing.
-            </h2>
-          </Reveal>
-
-          <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
-            {[
-              {
-                icon: FileText,
-                tile: "#FF6B35",
-                title: "Quotation Generator",
-                body: "Auto-numbered quotations with your company logo as a watermark, line items, GST (18% unless you change it) and a validity period. Send the PDF on WhatsApp or email, or print it, in under a minute.",
-                tag: "Free",
-                c: "var(--orange)",
-              },
-              {
-                icon: CalendarCheck,
-                tile: "#6D3BF5",
-                title: "Attendance Management",
-                body: "Mark staff attendance with a tap, track leaves and shifts, pull monthly reports at salary time.",
-                tag: "Custom build",
-                c: "var(--violet)",
-              },
-              {
-                icon: LayoutDashboard,
-                tile: "#2D3561",
-                title: "Customised CRM",
-                body: "Built around how your business actually runs — your fields, your stages, your reports.",
-                tag: "Custom build",
-                c: "var(--ink)",
-              },
-            ].map((tool, i) => (
-              <Reveal key={tool.title} delay={i * 0.1}>
-                <div
-                  data-spot
-                  className="group card card-lift tilt trace p-7 h-full"
-                >
-                  <IconTile icon={tool.icon} color={tool.tile} size={56} />
-
-                  <span
-                    className="inline-block mt-5 text-[11px] font-bold px-2.5 py-1 rounded-md"
-                    style={{
-                      background: `color-mix(in srgb, ${tool.c} 12%, transparent)`,
-                      color: tool.c,
-                    }}
-                  >
-                    {tool.tag}
+                    </span>
                   </span>
-
-                  <h3 className="display-md text-[19px] mt-3">{tool.title}</h3>
-                  <p
-                    className="mt-2.5 text-[14.5px] leading-relaxed"
-                    style={{ color: "var(--muted)" }}
-                  >
-                    {tool.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={0.3}>
-            <p
-              className="text-center mt-10 text-[14px] max-w-xl mx-auto leading-relaxed"
-              style={{ color: "var(--muted)" }}
-            >
-              Attendance and CRM are built for you, not off the shelf. Tell us
-              how your business runs and every build comes with setup, training
-              and ongoing support from our team.
-            </p>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </section>
 
-      {/* ==================== LASAN HUB ==================== */}
+      {/* ==================== LASAN MART HUB ==================== */}
       <section
         id="hub"
-        className="relative py-20 sm:py-28 px-5 overflow-hidden"
+        className="relative py-20 sm:py-28 px-5 overflow-hidden scroll-mt-16"
         style={{ background: "var(--ink)" }}
       >
         <div
@@ -965,455 +449,120 @@ export default function Home() {
           }}
         />
 
-        <div className="relative max-w-5xl mx-auto">
-          <Reveal>
-            <div className="text-center">
-              <span
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
-                style={{
-                  background: "rgba(255,197,41,0.14)",
-                  border: "1px solid rgba(255,197,41,0.25)",
-                }}
-              >
-                <span
-                  className="w-2 h-2 rounded-full animate-pulse"
-                  style={{ background: "var(--yellow)" }}
-                />
-                <span
-                  className="text-[12px] font-bold tracking-[0.14em]"
-                  style={{ color: "var(--yellow)" }}
-                >
-                  COMING SOON
-                </span>
-              </span>
-
-              <h2
-                className="display text-white mt-7"
-                style={{ fontSize: "clamp(32px, 6vw, 56px)" }}
-              >
-                Lasan Mart Hub
-              </h2>
-
-              <p className="text-white/60 text-[17px] mt-5 max-w-xl mx-auto leading-relaxed">
-                A second app, for the people who do the work. Creators, vendors
-                and freelancers join our verified network — and we bring them
-                jobs from businesses who have already paid.
-              </p>
-            </div>
-          </Reveal>
-
-          {/* The three who can join */}
-          <div className="grid md:grid-cols-3 gap-5 mt-16">
-            {[
-              {
-                icon: Star,
-                role: "Creators",
-                line: "Instagram, YouTube, city pages",
-                body: "Set your rate once. Businesses browse creators by category and city, and we bring you the brief.",
-                c: "#C13584",
-              },
-              {
-                icon: Store,
-                role: "Vendors",
-                line: "Hoardings, print, events, field teams",
-                body: "When a client needs what you offer, our team comes to the vendors on this list first.",
-                c: "#0EA97A",
-              },
-              {
-                icon: Laptop,
-                role: "Freelancers",
-                line: "Design, video, photography, marketing",
-                body: "No bidding wars, no undercutting. Scoped briefs, priced before they reach you.",
-                c: "#3A86FF",
-              },
-            ].map((r, i) => (
-              <Reveal key={r.role} delay={i * 0.1}>
-                <div
-                  data-spot
-                  className="rounded-[24px] p-7 h-full group transition-all duration-300 hover:-translate-y-2"
-                  style={
-                    {
-                      "--spot": "rgba(255,255,255,0.08)",
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                    } as React.CSSProperties
-                  }
-                >
-                  <IconTile icon={r.icon} color={r.c} size={56} dark />
-
-                  <h3
-                    className="display-md text-[21px] mt-6"
-                    style={{ color: r.c }}
-                  >
-                    {r.role}
-                  </h3>
-                  <p className="text-[12.5px] mt-1 text-white/40">{r.line}</p>
-
-                  <p className="text-[14.5px] leading-relaxed mt-4 text-white/65">
-                    {r.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* How a job travels */}
-          <Reveal delay={0.3}>
-            <div
-              className="rounded-[24px] p-6 sm:p-8 mt-10"
+        <div className="relative max-w-5xl mx-auto grid md:grid-cols-[1.15fr_auto] gap-12 md:gap-16 items-center">
+          <Reveal className="text-center md:text-left">
+            <span
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full"
               style={{
-                background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(255,255,255,0.08)",
+                background: "rgba(255,197,41,0.14)",
+                border: "1px solid rgba(255,197,41,0.25)",
               }}
             >
-              <p
-                className="eyebrow text-center"
+              <span
+                className="w-2 h-2 rounded-full animate-pulse"
+                style={{ background: "var(--yellow)" }}
+              />
+              <span
+                className="text-[12px] font-bold tracking-[0.14em]"
                 style={{ color: "var(--yellow)" }}
               >
-                How a job travels
-              </p>
+                COMING SOON
+              </span>
+            </span>
 
-              {/* Steps light up in order — stacked on phones, a row above */}
-              <ol className="flex flex-col sm:flex-row sm:flex-wrap items-stretch sm:items-center justify-center gap-2 sm:gap-3 mt-6 sm:mt-8">
-                {[
-                  "Business posts a request",
-                  "We match a partner",
-                  "They accept and get to work",
-                  "Client says how it went",
-                ].map((step, i, arr) => (
-                  <li
-                    key={step}
-                    className="flex flex-col sm:flex-row items-center gap-2 sm:gap-3"
-                    style={{ "--i": i } as React.CSSProperties}
-                  >
-                    <div className="flow-step w-full sm:w-auto px-4 py-3 rounded-2xl text-[13px] font-semibold text-center">
-                      {step}
-                    </div>
+            <h2
+              className="display text-white mt-6"
+              style={{ fontSize: "clamp(32px, 5.5vw, 54px)" }}
+            >
+              Do the work?
+              <br />
+              Get it on <span style={{ color: "var(--yellow)" }}>Hub.</span>
+            </h2>
 
-                    {i < arr.length - 1 && (
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="var(--yellow)"
-                        className="flow-arrow w-4 h-4 shrink-0 rotate-90 sm:rotate-0"
-                        aria-hidden
-                      >
-                        <path d="m10 17 5-5-5-5v10Z" />
-                      </svg>
-                    )}
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </Reveal>
+            <p className="text-white/65 text-[16px] sm:text-[17px] mt-5 max-w-lg mx-auto md:mx-0 leading-relaxed">
+              Lasan Mart Hub is our app for influencers, vendors and
+              freelancers. Join free, get verified by our team, and receive
+              paid jobs from businesses on Lasan Mart.
+            </p>
 
-          <Reveal delay={0.1}>
-            <HubRoles />
-          </Reveal>
-
-          {/* The partner terms, as the Hub app's FAQ states them */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
-            {[
-              {
-                icon: Wallet,
-                title: "Free to join, and stays free",
-                body: "We take our margin from what the client pays, not from you.",
-              },
-              {
-                icon: UserRoundCheck,
-                title: "A real person approves you",
-                body: "Usually within a day or two. Edit your profile later and it goes back for a quick re-check, so verified always means verified.",
-              },
-              {
-                icon: Undo2,
-                title: "Accept or decline every job",
-                body: "Offers land in your Work tab with a notification. Declining never counts against you; just tell us why.",
-              },
-              {
-                icon: BadgeCheck,
-                title: "Paid once it's done",
-                body: "We agree the amount with you before the job starts and pay once the work is complete and the client is happy.",
-              },
-              {
-                icon: Handshake,
-                title: "We handle the client",
-                body: "You see their first name and the brief. Everything else goes through our team, so you never chase anyone.",
-              },
-              {
-                icon: ListChecks,
-                title: "Mark progress as you go",
-                body: "Accepted, in progress, completed. Each step reaches the business in Lasan Mart the moment you tap it.",
-              },
-              {
-                icon: Gauge,
-                title: "A profile that tells you what's missing",
-                body: "Profile strength shows exactly which details would help our team place more work with you.",
-              },
-              {
-                icon: LifeBuoy,
-                title: "Support built in",
-                body: "Raise a question about payment, your profile or availability from the app and follow it until it's resolved.",
-              },
-            ].map((p, i) => (
-              <Reveal key={p.title} delay={Math.min(i, 4) * 0.06}>
-                <div
-                  data-spot
-                  className="group rounded-[20px] p-5 h-full transition-transform duration-300 hover:-translate-y-1"
-                  style={
-                    {
-                      "--spot": "rgba(255,197,41,0.08)",
-                      background: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.1)",
-                    } as React.CSSProperties
-                  }
-                >
+            <ul className="grid sm:grid-cols-2 gap-x-6 gap-y-5 mt-9 text-left max-w-lg mx-auto md:mx-0">
+              {[
+                {
+                  icon: Wallet,
+                  title: "Free to join, always",
+                  body: "Our margin comes from the client, not from you.",
+                },
+                {
+                  icon: Handshake,
+                  title: "No bidding wars",
+                  body: "Jobs reach you scoped and priced.",
+                },
+                {
+                  icon: Undo2,
+                  title: "Your call on every job",
+                  body: "Accept or decline. Declining never counts against you.",
+                },
+                {
+                  icon: BadgeCheck,
+                  title: "Paid when it's done",
+                  body: "The amount is agreed before you start.",
+                },
+              ].map((p) => (
+                <li key={p.title} className="flex gap-3">
                   <span
-                    className="icon-tile w-10 h-10 text-[var(--yellow)]"
-                    style={
-                      {
-                        "--tile": "#FFC529",
-                        background: "rgba(255,197,41,0.12)",
-                      } as React.CSSProperties
-                    }
+                    aria-hidden
+                    className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
+                    style={{ background: "rgba(255,197,41,0.12)", color: "var(--yellow)" }}
                   >
-                    <p.icon size={19} strokeWidth={1.9} aria-hidden />
+                    <p.icon size={17} />
                   </span>
-                  <h3 className="text-white text-[15px] font-semibold mt-3">
-                    {p.title}
-                  </h3>
-                  <p className="text-white/55 text-[13.5px] leading-relaxed mt-2">
-                    {p.body}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+                  <span>
+                    <span className="block text-white text-[15px] font-semibold">
+                      {p.title}
+                    </span>
+                    <span className="block text-white/55 text-[13.5px] leading-relaxed mt-0.5">
+                      {p.body}
+                    </span>
+                  </span>
+                </li>
+              ))}
+            </ul>
 
-          <Reveal delay={0.4}>
-            <p className="text-center text-white/40 text-[14px] mt-10">
-              Want to join when it opens? Call or{" "}
+            <p className="text-white/50 text-[14px] mt-9">
+              Want in when it opens?{" "}
               <a
                 href={`https://wa.me/91${CONTACT.phone}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-semibold hover:text-white/70"
+                className="font-semibold hover:text-white/80"
                 style={{ color: "var(--yellow)" }}
               >
                 WhatsApp
               </a>{" "}
-              us on{" "}
+              or call us on{" "}
               <a
                 href={`tel:+91${CONTACT.phone}`}
-                className="font-semibold hover:text-white/70"
+                className="font-semibold hover:text-white/80"
                 style={{ color: "var(--yellow)" }}
               >
                 {CONTACT.phone}
               </a>
             </p>
           </Reveal>
-        </div>
-      </section>
 
-      {/* ==================== BOTH APPS ==================== */}
-      <section id="apps" className="relative py-20 sm:py-28 px-5 overflow-hidden">
-        <div
-          className="blob drift"
-          style={{
-            width: 420,
-            height: 420,
-            top: "5%",
-            right: "-12%",
-            background: "var(--orange)",
-            opacity: 0.12,
-          }}
-        />
-
-        <div className="relative max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--orange)" }}
+          <Reveal delay={0.15} className="flex justify-center">
+            <Device
+              label={SCREEN_LABELS.hub}
+              className="[--s:0.66] sm:[--s:0.74] rotate-[3deg]"
             >
-              Open to everyone
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              Two apps.
-              <br />
-              Made for <span className="marker">anyone.</span>
-            </h2>
-            <p
-              className="text-center mt-5 text-[16px] max-w-xl mx-auto leading-relaxed"
-              style={{ color: "var(--muted)" }}
-            >
-              You don&apos;t need to run a business to use Lasan Mart, or be a
-              vendor to use Lasan Mart Hub. Download one, or both — whoever you
-              are.
-            </p>
-          </Reveal>
-
-          <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mt-12 sm:mt-16">
-            {[
-              {
-                name: "Lasan Mart",
-                tag: "Available now",
-                line: "For anyone who wants to be seen.",
-                points: [
-                  "Ask for any of our 30 services",
-                  "Watch Lasan Vibes, and post once approved",
-                  "Use free tools like the Quotation Generator",
-                ],
-                dark: false,
-              },
-              {
-                name: "Lasan Mart Hub",
-                tag: "Coming soon",
-                line: "For anyone who wants to earn.",
-                points: [
-                  "Join as a creator, vendor or freelancer",
-                  "Get briefs that are priced before they reach you",
-                  "No bidding wars, no undercutting",
-                ],
-                dark: true,
-              },
-            ].map((app, i) => (
-              <Reveal key={app.name} delay={i * 0.1}>
-                <div
-                  className="rounded-[24px] p-8 h-full tilt"
-                  style={{
-                    background: app.dark
-                      ? "linear-gradient(160deg,#7C4DFF,#4B21C4)"
-                      : "#fff",
-                    border: app.dark
-                      ? "1px solid transparent"
-                      : "1px solid var(--line)",
-                    boxShadow: app.dark
-                      ? "0 24px 50px rgba(75,33,196,0.26)"
-                      : "0 4px 16px rgba(20,16,46,0.05)",
-                  }}
-                >
-                  <span
-                    className="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md"
-                    style={{
-                      background: app.dark
-                        ? "rgba(255,197,41,0.18)"
-                        : "rgba(255,107,53,0.12)",
-                      color: app.dark ? "var(--yellow)" : "var(--orange)",
-                    }}
-                  >
-                    {app.tag}
-                  </span>
-
-                  <h3
-                    className="display-md text-[24px] mt-5"
-                    style={{ color: app.dark ? "#fff" : "var(--ink)" }}
-                  >
-                    {app.name}
-                  </h3>
-                  <p
-                    className="text-[15px] mt-1.5"
-                    style={{
-                      color: app.dark
-                        ? "rgba(255,255,255,0.65)"
-                        : "var(--muted)",
-                    }}
-                  >
-                    {app.line}
-                  </p>
-
-                  <ul className="ticks space-y-3 mt-6">
-                    {app.points.map((p) => (
-                      <li
-                        key={p}
-                        className="flex items-start gap-2.5 text-[14.5px]"
-                        style={{
-                          color: app.dark ? "#fff" : "var(--ink)",
-                          opacity: 0.85,
-                        }}
-                      >
-                        <span
-                          aria-hidden
-                          className="w-[18px] h-[18px] shrink-0 mt-px rounded-full flex items-center justify-center"
-                          style={{
-                            background: app.dark
-                              ? "rgba(255,197,41,0.2)"
-                              : "rgba(255,107,53,0.12)",
-                            color: app.dark ? "var(--yellow)" : "var(--orange)",
-                          }}
-                        >
-                          <Check size={11} strokeWidth={3.2} />
-                        </span>
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* Hub members should grab Mart too — that's where Vibes lives */}
-          <Reveal delay={0.2}>
-            <div
-              className="rounded-[24px] p-8 md:p-10 mt-8 grid md:grid-cols-[1.3fr_1fr] gap-8 items-center"
-              style={{ background: "var(--ink)" }}
-            >
-              <div>
-                <p className="eyebrow" style={{ color: "var(--yellow)" }}>
-                  On Hub? Get Lasan Mart too
-                </p>
-                <h3
-                  className="display text-white mt-3"
-                  style={{ fontSize: "clamp(24px, 3.4vw, 32px)" }}
-                >
-                  Your work belongs on Lasan Vibes.
-                </h3>
-                <p className="text-white/60 text-[15px] leading-relaxed mt-4 max-w-md">
-                  Lasan Vibes lives inside Lasan Mart. Install it alongside Hub,
-                  ask to post, and share your shoots, reels and finished jobs
-                  where every Lasan Mart user sees them. It&apos;s the easiest
-                  way to show businesses what you can do.
-                </p>
-                <div className="mt-7">
-                  <StoreButton />
-                </div>
-              </div>
-
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                {[
-                  { label: "Lasan Mart Hub", c: "var(--violet)" },
-                  { label: "Lasan Mart", c: "var(--orange)" },
-                ].map((chip, i) => (
-                  <div key={chip.label} className="flex items-center gap-3">
-                    {i > 0 && (
-                      <span className="display text-[22px] text-white/40">
-                        +
-                      </span>
-                    )}
-                    <span
-                      className="px-4 py-2.5 rounded-2xl text-[13px] font-semibold text-white"
-                      style={{ background: chip.c }}
-                    >
-                      {chip.label}
-                    </span>
-                  </div>
-                ))}
-                <span className="display text-[22px] text-white/40">=</span>
-                <span
-                  className="px-4 py-2.5 rounded-2xl text-[13px] font-bold"
-                  style={{ background: "var(--yellow)", color: "var(--ink)" }}
-                >
-                  Seen on Vibes
-                </span>
-              </div>
-            </div>
+              <HubScreen />
+            </Device>
           </Reveal>
         </div>
       </section>
 
       {/* ==================== FAQ ==================== */}
-      <section id="faq" className="relative py-20 sm:py-28 px-5 overflow-hidden">
+      <section id="faq" className="relative py-20 sm:py-28 px-5 overflow-hidden scroll-mt-16">
         <div
           className="blob"
           style={{
@@ -1427,26 +576,13 @@ export default function Home() {
         />
 
         <div className="relative max-w-5xl mx-auto">
-          <Reveal>
-            <p
-              className="eyebrow text-center"
-              style={{ color: "var(--orange)" }}
-            >
-              Questions
-            </p>
-            <h2
-              className="display text-center mt-4"
-              style={{ fontSize: "clamp(30px, 5vw, 48px)" }}
-            >
-              The things people ask.
-            </h2>
-            <p
-              className="text-center mt-5 text-[16px] max-w-md mx-auto"
-              style={{ color: "var(--muted)" }}
-            >
-              Anything else, call us — we&apos;d rather talk it through.
-            </p>
-          </Reveal>
+          <SectionIntro
+            eyebrow="FAQ"
+            c="var(--orange)"
+            sub="Something else? Call or WhatsApp us. We'd rather talk it through."
+          >
+            Questions, answered.
+          </SectionIntro>
 
           <Faq />
         </div>
@@ -1486,16 +622,16 @@ export default function Home() {
           <Reveal>
             <h2
               className="display text-white"
-              style={{ fontSize: "clamp(32px, 6vw, 56px)" }}
+              style={{ fontSize: "clamp(32px, 6vw, 58px)" }}
             >
-              Let&apos;s get your
+              Your next customer
               <br />
-              business seen.
+              is <span style={{ color: "var(--yellow)" }}>scrolling</span> right now.
             </h2>
 
-            <p className="text-white/60 text-[17px] mt-6 max-w-lg mx-auto leading-relaxed">
-              Download the app, post what you need, and our team takes it from
-              there. Free to use — you only pay for the work you approve.
+            <p className="text-white/65 text-[17px] mt-6 max-w-lg mx-auto leading-relaxed">
+              Get Lasan Mart, tell us what you need, and our team takes it from
+              there. It&apos;s free to use. You only pay for work you approve.
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 mt-10">
@@ -1520,7 +656,11 @@ export default function Home() {
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-14 text-[14px] text-white/45">
+            <p className="text-white/40 text-[13px] mt-5">
+              iPhone version coming soon
+            </p>
+
+            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 mt-12 text-[14px] text-white/45">
               <span className="inline-flex items-center gap-2">
                 <MapPin size={15} aria-hidden /> {CONTACT.city}
               </span>
@@ -1572,6 +712,7 @@ export default function Home() {
               className="flex flex-wrap items-baseline justify-center gap-x-6 gap-y-2 text-[13px] text-white/55"
             >
               {[
+                { href: "#app", label: "The app" },
                 { href: "#services", label: "Services" },
                 { href: "#plans", label: "Plans" },
                 { href: "#hub", label: "Lasan Mart Hub" },
