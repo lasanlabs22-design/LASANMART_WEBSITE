@@ -37,7 +37,7 @@ import { ONLINE_SERVICES, OFFLINE_SERVICES } from "@/lib/site";
  * Line icons standing in for the MaterialCommunityIcons each service
  * uses in the app (homeCategories.ts), with the app's tile colours.
  */
-const ICONS: Record<string, [LucideIcon, string]> = {
+export const SERVICE_ICONS: Record<string, [LucideIcon, string]> = {
   "Digital Marketing": [Megaphone, "#FF6B35"],
   "Website & CRM": [Laptop, "#2D6CDF"],
   "Social Media": [Smartphone, "#C13584"],
@@ -100,7 +100,7 @@ export default function ServiceLists() {
             </div>
             <ul className="relative z-[2] flex flex-wrap gap-2 mt-5">
               {group.items.map((s) => {
-                const [Icon, c] = ICONS[s] ?? [Megaphone, "#6D3BF5"];
+                const [Icon, c] = SERVICE_ICONS[s] ?? [Megaphone, "#6D3BF5"];
                 return (
                   <li
                     key={s}

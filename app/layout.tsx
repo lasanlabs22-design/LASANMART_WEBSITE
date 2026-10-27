@@ -29,13 +29,13 @@ const signature = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Lasan Mart — Your Business. Our Marketplace.",
+  title: "Lasan Mart — Your whole marketing team, in one app",
   description:
-    "Tell us what marketing you need — hoardings, social media, influencers, websites — and our team handles the rest. Built for businesses across Andhra Pradesh.",
+    "30 marketing services on your phone, from Instagram reels and Google ads to hoardings and events. Pick one, and our Tirupati team calls you back with a plan and a price.",
   openGraph: {
-    title: "Lasan Mart — Your Business. Our Marketplace.",
+    title: "Lasan Mart — Your whole marketing team, in one app",
     description:
-      "Online and offline marketing, handled end to end. Post what you need and our team takes it from there.",
+      "Pick a service in the app, tell us what you need, and our team does the rest. Free to use; you only pay for work you approve.",
     type: "website",
   },
 };
